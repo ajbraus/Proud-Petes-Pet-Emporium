@@ -1,6 +1,6 @@
-title: "Tutorial Template Title, max 56 characters"
-cover: cover.png
+title: "Pete's Pet Emporium - Advanced Web Recipes"
+cover: cover.jpg
 teaser_text: |
-    Tell the user what they will learn!
-    This can be multi-line text.
-    150 characters max!
+    By building a pet store for Pete's Pet Emporium
+    you'll learn how to search & add pagination,
+    upload files, add payment gateways, and send emails.

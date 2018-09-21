@@ -3,7 +3,15 @@ title: "Getting Started: Reading Code"
 slug: getting-started
 ---
 
-This tutorial will walk you through adding some fancy features to an Express.js server including simple search & pagination, adding validations and error and success messages, uploading images and files, adding payment gateways like Stripe, and sending emails (and more!).
+This tutorial will walk you through adding the most common advanced features to an Express.js server including
+
+ * Simple Search
+ * Pagination
+ * Adding Validations
+ * Error and success messages
+ * Uploading images and files
+ * Adding payment gateways like Stripe
+ * Sending emails (and more!).
 
 ### Outside In Philosophy & Vaporware
 
@@ -34,6 +42,8 @@ Now your browser at `localhost:3000` should look like this:
 
 ![petes-pets](assets/petes-pets.png)
 
+You can also run `$ mocha` and see the tests run. They should all pass!
+
 # Reading the Code Base
 
 If you try to navigate around, you'll find that the behavior is kind of funky. You can create new pets and comments, but what if you restart the server? Everything is back to the way it was before.
@@ -47,6 +57,7 @@ Here are some characteristics of this project:
 * *1 Resource* - How many resources are there in this application? What are they? - There is 1 resource: Pets
 * *Pug* - This project uses the templating engine called [Pug](https://pugjs.org/api/getting-started.html). Pug is an *HTML preprocessor* that simplifies HTML into a python-like syntax. Watch out for indentation!
 * *Seeding the DB* - The `seeds` folder contains files that we can use to seed the database.
+* `/bin/www` - notice that the server runs out of the `bin/www` file. Weird! But actually a common convention. We are pulling the concern of starting the server (`app.listen()`) into its own file (just like we pulled out routes, models, and views).
 
 What other characteristics can you find?
 

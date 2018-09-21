@@ -3,15 +3,13 @@ title: "Simple Search"
 slug: "simple-search"
 ---
 
-So now what if we wanted to search for a certain species of dog? or for the name of a dog we met last week? There are two solutions: **Filter** and **Search**.
+So now what if we wanted to search for a certain species of dog? or for the name of a dog we met last week? Let's search!
 
-**Filter** - Filtering allows you to filter down to a particular subset of records. It is often completed on the client without use of the server.
+**Search** usually means you enter a search term and the server queries the database and responds with a subset of records and displays them.
 
-**Search** - Search usually means you enter a search term and the server queries the database and responds with a subset of records and displays them.
+Here we will be adding **Simple Search** meaning that we will be contacting the server with a request with a search term, the server will make a request using only a sort of **fuzzy keyword lookup** using **Regular Expressions** on one parameter. We will see there is a way to extend simple search to work for multiple parameters.
 
-Here we will be adding **Simple Search** meaning that we will be contacting the server with a request with a search term, the server will make a request using only a fuzzy keyword lookup on one parameter. We will see there is a way to extend simple search to work for multiple parameters.
-
-After this chapter you can skip to chapter 7 if you want to do a **Full Text Search**. Full text search allows you to search for multiple words across the whole text of a parameter (even a block of text) and any parameters with various search weights attached to each. MongoDB and other document-based databases ship with the ability to add full text search natively. SQL databases need a secondary service such as [Sphinx](http://sphinxsearch.com/) or [Apache Lucene](https://lucene.apache.org/) to achieve full text search.
+Chapter 7 will cover **Full Text Search**. Full text search allows you to search for multiple words across the whole text of a parameter (even a block of text) and any parameters with various search weights attached to each. MongoDB and other document-based databases ship with the ability to add full text search natively. SQL databases need a secondary service such as [Sphinx](http://sphinxsearch.com/) or [Apache Lucene](https://lucene.apache.org/) to achieve full text search.
 
 # Make a Plan
 
@@ -28,7 +26,7 @@ Let's code from the **Outside-In**, so we'll start with the views, then do the c
 
 Now we need a pug form in our header navbar.
 
-So we can take the bootstrap 4 [navbar form](https://getbootstrap.com/docs/4.0/components/navbar/#forms) and plug it into a jade/pug => [HTML converter](http://html2jade.org/). And put this into `layout.pug`
+So we can take the bootstrap 4 [navbar form](https://getbootstrap.com/docs/4.0/components/navbar/#forms) and plug it into a jade/pug => [HTML converter](http://html2jade.org/). And put this into the `.navbar` in the `layout.pug` file.
 
 ```
 form.form-inline(action='/search')
@@ -49,7 +47,7 @@ http://localhost:3000/search?term=test
 # Search Route
 
 1. ~~Make a search form - one input field and button that submits a url structured like this `/search?term=poodle`~~
-2. Make a `/search` route that responds with a template `pets-search.html` (we'll just reuse the `pets-index.pug` template)
+2. Make a `/search` route that responds with a template—we'll just reuse the `pets-index.pug` template.
 3. Make the `/search` route actually search using our `Pet` model.
 4. Write a test (if we were doing TDD (Test Driven Development) we'd start with this!)
 
@@ -71,7 +69,7 @@ app.get('/search', (req, res) => {
 
 Now let's actually search using `Pet`.
 
-**Simple Search**, remember, means doing a **Fuzzy Search** on one parameter. So we are going to search just on name. To make it search, we're going to use the `i` modifier on a new Regular Expression to do **case-insensitive matching**.
+**Simple Search**, remember, means doing a **Fuzzy Keyword Lookup** on one parameter using **Regular Expressions**. So we are going to search just on name. To make it search, we're going to use the `i` modifier on a new Regular Expression to do **case-insensitive matching**.
 
 ```js
 // SEARCH PET
@@ -83,6 +81,10 @@ app.get('/search', (req, res) => {
   })
 });
 ```
+
+Open your browser and try searching for a dog's name.
+
+# Searching for Name or Bread
 
 As a stretch challenge, let's look at using the mongo `$or` condition to extend **simple search** to be able to search for breed or name.
 
@@ -99,6 +101,8 @@ app.get('/search', (req, res) => {
   })
 });
 ```
+
+Open your browser and try searching for a dog's name or breed you can see.
 
 # Write a Test
 

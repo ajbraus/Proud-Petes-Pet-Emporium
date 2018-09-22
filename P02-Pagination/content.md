@@ -39,14 +39,14 @@ nav(aria-label='Page navigation example').d-flex.justify-content-center
       a.page-link(href='#') Next
 ```
 
-It doesn't do much right now... its totally static! We'll have to do some work to make it dynamically as long as however many pet records are returned. So if there are 35 records, there should be 4 pages, (at most 10 per page, 5 on the fourth page).
+It doesn't do much right now... its totally static! We'll have to do some work to make it respond intelligently to the number of pet records we have. For example, if there are 35 records, there should be 4 pages, (at most 10 per page, 5 on the fourth page).
 
 # Pagination Module
 
 Mongoose does not ship with pagination supported, but we can add it using the `mongoose-paginate` module because [edwardhotchkiss](https://github.com/edwardhotchkiss/mongoose-paginate) made it!
 
 ```bash
-$ npm install mongoose-paginate
+$ npm install mongoose-paginate --save
 ```
 
 Now initialize it, set its defaults options, and add it as a plugin for our model.

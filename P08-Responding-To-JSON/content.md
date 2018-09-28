@@ -48,11 +48,14 @@ if (req.header('Content-Type') == 'application/json') {
 
 In addition to this change, you'll have to tell your mobile developer, or your front end developer to update their requests to always explicitly request `application/json`.
 
+# Testing API Endpoints
 
+To test that your server is responding with both HTML and JSON, add additional tests for the JSON responses that look like this (for Option #2):
 
 ```js
   it('should list ALL pets on /pets GET', (done) => {
     chai.request(server)
+        .set('content-type', 'application/json')
         .get('/pets')
         .end(function(err, res){
           res.should.have.status(200);

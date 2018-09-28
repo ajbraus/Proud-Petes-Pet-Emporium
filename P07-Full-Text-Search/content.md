@@ -3,34 +3,38 @@ title: "Full Text Search"
 slug: "full-text-search"
 ---
 
+Mongo ships with native **Full Text Search**. All you have to do is add an index on the attributes you want to search on. You can even add **weights** to the various attributes, if you'd like to have text in the title to be worth more in the search than text in the content.
+
+```js
+// your-model.js
+
+// without weights
+schema.index({ animal: 'text', color: 'text', pattern: 'text', size: 'text' });
+
+// with weights
+schema.index({ animal: 'text', color: 'text', pattern: 'text', size: 'text' }, {name: 'My text index', weights: {animal: 10, color: 4, pattern: 2, size: 1}});
+```
+
+Now to call the search, use the `$text` option. The `$meta: 'textScore'` tells Mongoose to use the weights.
+
 ```js
 // SEARCH
 app.get('/search', function (req, res) {
-  Tour
+  Pet
       .find(
           { $text : { $search : req.query.term } },
           { score : { $meta: "textScore" } }
       )
       .sort({ score : { $meta : 'textScore' } })
-      // .sort('-createdAt')
-      // .populate('user')
       .limit(20)
-      .exec(function(err, tours) {
+      .exec(function(err, pets) {
         if (err) { return res.status(400).send(err) }
-        // if (tours.length == 0) { return res.status(400).send({ message: "Your query returned no campaigns" }) }
-        // if (tours.length == 0) {
-        //   return res.render('tours-search', { tours: [] });
-        // }
 
         if (req.header('Content-Type') == 'application/json') {
-          return res.json({ tours: tours });
+          return res.json({ pets: pets });
         } else {
-          return res.render('tours-search', { tours: tours, term: req.query.term });
+          return res.render('pets-search', { pets: pets, term: req.query.term });
         }
       });
-
-  // Tour.paginate({}, { sort:'-createdAt', page: req.query.pages, populate: 'user' }).then(function (result) {
-    // if (err) { return res.status(400).send(err) }
-  // });
 });
 ```

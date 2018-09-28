@@ -76,6 +76,23 @@ You might use a gmail account for a minimum viable product, but gmail will only 
 
 `nodemailer-mailgun-transport` uses `consolidate.js` under the hood to add support for templating engines.
 
+So let's make a second plan to refactor the above code to remove `express-mailer` and add `nodemailer` and `nodemailer-mailgun-transport` instead.
+
+1. Uninstall `express-mailer` and remove `express-mailer` code from `app.js` and our controller.
+1. Install `nodemailer` and `nodemailer-mailgun-transport`
+1. Create a Mailgun account and add our API keys to our `.env` file.
+1. Configure `nodemailer` and `nodemailer-mailgun-transport` using our Mailgun API key and sandbox domain
+1. Add code to send test email.
+1. Test if test email sent.
+
+# Switch-a-roo
+
+If you think about it, we are using `nodemailer` either way, because `express-mailer` is just a wrapper for `nodemailer` that simplifies using express features like the view engine. `nodemailer-mailgun-transport` will do the same, but just facilitate our connection to the Mailgun service.
+
+So, in order to use mailgun we have to unwrap and use `nodemailer` without `express-mailer`.
+
+So delete or comment out the code, or better yet, move it to a different "code graveyard" file to look at and use later. 
+
 
 ```js
 var nodemailer = require('nodemailer');
@@ -84,14 +101,12 @@ var mg = require('nodemailer-mailgun-transport');
 // This is your API key that you retrieve from www.mailgun.com/cp (free up to 10K monthly emails)
 var auth = {
   auth: {
-    api_key: 'key-1234123412341234',
-    domain: 'one of your domain names listed at your https://mailgun.com/app/domains'
-  },
-  proxy: 'http://user:pass@localhost:8080' // optional proxy, default is false
+    api_key: process.env.MAILGUN_API_KEY,
+    domain: process.env.MAILGUN_DOMAIN // listed at your https://mailgun.com/app/domains
+  }
 }
 
 var nodemailerMailgun = nodemailer.createTransport(mg(auth));
-
 
 // SEND EMAIL
 var user = {
@@ -100,12 +115,12 @@ var user = {
 };
 
 nodemailerMailgun.sendMail({
-  from: 'myemail@example.com',
-  to: 'recipient@domain.com', // An array if you have multiple recipients.
+  from: 'no-reply@example.com',
+  to: user.email, // An array if you have multiple recipients.
   subject: 'Hey you, awesome!',
   template: {
-    name: 'email.hbs',
-    engine: 'handlebars',
+    name: 'emails/welcome.pug',
+    engine: 'pug',
     context: user
   }
 }).then(info => {
@@ -115,4 +130,4 @@ nodemailerMailgun.sendMail({
 });
 ```
 
-In order to use mailgun we have to unwrap and use `nodemailer` without `express-mailer`. Then we'll need to extend `nodemailer` with the `nodemailer-mailgun-transport` [docs](https://github.com/orliesaurus/nodemailer-mailgun-transport) to be able to use our templating engine.
+Then we'll need to extend `nodemailer` with the `nodemailer-mailgun-transport` [docs](https://github.com/orliesaurus/nodemailer-mailgun-transport) to be able to use our templating engine.

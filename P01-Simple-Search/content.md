@@ -136,3 +136,7 @@ it('should search ALL pets by name on /search GET', (done) => {
 ```
 
 The only problem with this test is that it doesn't really check if the search returns pets named "Norman". It just checks if the http status is 200, which it will be so long as there is no error, even if the search is not working. But at least we have some test coverage!
+
+## Reference
+
+[Excellent video by Ian Schoonover](https://www.youtube.com/watch?v=9_lKMTXVk64) to add search to your Rotten Potatoes project.

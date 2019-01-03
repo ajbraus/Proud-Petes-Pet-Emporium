@@ -137,7 +137,7 @@ Open up your Pet model in the `pet.js` file, and let's add a simple validation u
 > info
 > Take about 10 minutes to read Mongoose's [documentation](http://mongoosejs.com/docs/validation.html) on validations
 
-Something special about mongoose is the canned standard validation messages are really terrible, so we are going to customize those for our app and I recommend you always do this.
+Something special about mongoose is the canned standard validation messages are really terrible, so we are going to customize those for our app.
 
 ```js
 const PetSchema = new Schema({
@@ -145,10 +145,10 @@ const PetSchema = new Schema({
   , updatedAt       : { type: Date }
 
   , name            : { type: String, required: true }
-  , species         : { type: String, required: true }
-  , picUrl          : { type: String, required: true }
-  , picUrlSq        : { type: String, required: true }
-  , favoriteFood    : { type: String, required: true }
+  , species         : { type: String }
+  , picUrl          : { type: String }
+  , picUrlSq        : { type: String }
+  , favoriteFood    : { type: String }
   , description     : { type: String, min: 140 }
 }, {
   timestamps: true

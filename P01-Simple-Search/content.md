@@ -24,14 +24,19 @@ Let's code from the **Outside-In**, so we'll start with the views, then do the c
 
 # Search Form
 
-Now we need a pug form in our header navbar.
+Now we need a `pug` form in our header `navbar`.
 
-So we can take the bootstrap 4 [navbar form](https://getbootstrap.com/docs/4.0/components/navbar/#forms) and plug it into a jade/pug => [HTML converter](http://html2jade.org/). And put this into the `.navbar` in the `layout.pug` file.
+So we can take the bootstrap 4 [navbar form](https://getbootstrap.com/docs/4.0/components/navbar/#forms) and plug it into a `jade/pug` => [HTML converter](http://html2jade.org/). And put this into the `nav` in the `layout.pug` file.
 
-```
-form.form-inline(action='/search')
-  input.form-control.mr-sm-2(type='search', placeholder='Search', aria-label='Search' name='term')
-  button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+>[action]
+> Update the `nav` in `layout.pug` to include the form:
+>
+```pug
+nav.navbar.navbar-expand-sm.navbar-light.bg-light
+...
+    form.form-inline(action='/search')
+      input.form-control.mr-sm-2(type='search', placeholder='Search', aria-label='Search' name='term')
+      button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
 ```
 
 Make sure your homepage looks like this:
@@ -51,7 +56,8 @@ http://localhost:3000/search?term=test
 3. Make the `/search` route actually search using our `Pet` model.
 4. Write a test (if we were doing TDD (Test Driven Development) we'd start with this!)
 
-Now we need to make that `/search` route in `routes/pets.js`. We'll have it use the same `pets-index.pug` template.
+>[action]
+> Make the `/search` route in `routes/pets.js`, using the same `pets-index.pug` template.
 
 ```js
 // SEARCH PET
@@ -67,15 +73,18 @@ app.get('/search', (req, res) => {
 3. Make the `/search` route actually search using our `Pet` model.
 4. Write a test (if we were doing TDD (Test Driven Development) we'd start with this!)
 
-Now let's actually search using `Pet`.
+Great, so now when we search, we have a results page, but now let's properly populate the page using the `Pet` model.
 
-**Simple Search**, remember, means doing a **Fuzzy Keyword Lookup** on one parameter using **Regular Expressions**. So we are going to search just on name. To make it search, we're going to use the `i` modifier on a new Regular Expression to do **case-insensitive matching**.
+**Simple Search**, remember, means doing a **Fuzzy Keyword Lookup** on one parameter using **Regular Expressions**. So we are going to search *just on name*. To make it search, we're going to use the `i` modifier on a new Regular Expression to do **case-insensitive matching**.
 
+>[action]
+> Update `/routes/pets/search` to the following:
+>
 ```js
 // SEARCH PET
 app.get('/search', (req, res) => {
   term = new RegExp(req.query.term, 'i')
-
+>
   Pet.find({'name': term}).exec((err, pets) => {
     res.render('pets-index', { pets: pets });
   })
@@ -84,10 +93,12 @@ app.get('/search', (req, res) => {
 
 Open your browser and try searching for a dog's name.
 
-# Searching for Name or Bread
+# Searching for Name or Breed
 
-As a stretch challenge, let's look at using the mongo `$or` condition to extend **simple search** to be able to search for breed or name.
+What if we want to expand our search beyond just the name of the pet? Maybe you'd like to see every Poodle? Let's look at using the mongo `$or` condition to extend **simple search** to be able to search for *breed or name*.
 
+> [action]
+> Update `/routes/pets/search` to the following:
 ```js
 // SEARCH PET
 app.get('/search', (req, res) => {
@@ -102,7 +113,7 @@ app.get('/search', (req, res) => {
 });
 ```
 
-Open your browser and try searching for a dog's name or breed you can see.
+Open your browser and try searching for a dog's name or breed.
 
 # Write a Test
 
@@ -140,3 +151,11 @@ The only problem with this test is that it doesn't really check if the search re
 ## Reference
 
 [Excellent video by Ian Schoonover](https://www.youtube.com/watch?v=9_lKMTXVk64) to add search to your Rotten Potatoes project.
+
+# Now Commit
+
+```bash
+git add .
+git commit -m 'Users can search pets by name and breed'
+git push
+```

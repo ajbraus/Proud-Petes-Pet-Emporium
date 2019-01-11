@@ -159,3 +159,5 @@ git add .
 git commit -m 'Users can search pets by name and breed'
 git push
 ```
+
+You've successfully implemented **Simple Search!** Let's move on to the next feature!

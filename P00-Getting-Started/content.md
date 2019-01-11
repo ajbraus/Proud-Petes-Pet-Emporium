@@ -3,7 +3,7 @@ title: "Getting Started: Reading Code"
 slug: getting-started
 ---
 
-This tutorial will walk you through adding the most common advanced features to an Express.js server including
+This tutorial will walk you through adding the most common advanced features to an Express.js server. By the end of this tutorial, you should be able to add the following features to an Express.js server:
 
  * Simple Search
  * Pagination
@@ -18,20 +18,42 @@ This tutorial will walk you through adding the most common advanced features to 
 We're going to build this whole app from the outside-in, meaning each step, we're always going to build what the user sees (the **views** or **templates**) first. We can even populate these with some mock data using arrays. This first step is called building **Vaporware** and is an excellent pattern that will save you time and improve your client and stakeholder happiness.
 
 > [info]
-**Vaporware** is when you build out the templates with mock data is a fantastic pattern to build navigable mock ups for clients and stakeholders before committing to building the logic and database relationships.
+**Vaporware** is when you build out the templates with mock data, and it is a fantastic pattern to build navigable mock ups for clients and stakeholders before committing to building the logic and database relationships.
 
-# Getting Started - Cloning the Starter Project
+# Commits with Git
 
-You won't always be starting with a **Green Field Project** - a project where you start from scratch - most of the time you'll work on a project that already started. In this tutorial we'll simulate that by starting with a relatively simple starter project.
+As you go through this tutorial, you will also be making commits after completing milestones. **This is a requirement, you must make a commit whenever the tutorial prompts you**. This not only further enforces best practices for software engineering, but also will help you more easily figure out where a bug originated from if you break your progress up into discrete, trackable chunks.
 
+When prompted to commit, you'll see a sample commit message. Feel free to use your own message, so long as it clearly and concisely covers the work done.
+
+Lastly, the commit prompts in this tutorial should be the **minimum** amount of times you commit. If you want to do more commits, breaking your chunks into even smaller chunks, that is totally fine!
+
+# Getting Started - Forking/Cloning the Starter Project
+
+You won't always be starting with a **Green Field Project** - a project where you start from scratch - sometimes you'll work on a project that has already started. In this tutorial we'll simulate that by starting with a relatively simple starter project.
+
+>[action]
+> Go to the [starter repo](https://github.com/Product-College-Labs/petes-pets) and **fork** the repo into your own personal account
+> ![fork-github](assets/fork-github.png)
+
+Doing this will allow you to commit/push/pull the changes you make to your own account. **It is very important you do the above step first before doing the below**.
+
+Once you have **forked** the repo, continue on to the next steps:
+
+> [action]
+> Clone the starter project from your fork
+>
 ```bash
-$ git clone https://github.com/Product-College-Labs/petes-pets petes-pets-tutorial
-$ cd petes-pets-tutorial
-$ npm install
+git clone [URL to your starter repo] petes-pets-tutorial
+cd petes-pets-tutorial
+npm install
 ```
 
-Once you've cloned the starter project and installed the dependent node modules, there is just one more step to seed your database before running your server.
+Now there is just one more step to seed your database before running your server.
 
+> [action]
+> Install `node-mongo-seeds`
+>
 ```bash
 $ npm install -g node-mongo-seeds
 $ seed
@@ -46,7 +68,7 @@ You can also run `$ mocha` and see the tests run. They should all pass!
 
 # Reading the Code Base
 
-If you try to navigate around, you'll find that the behavior is kind of funky. You can create new pets and comments, but what if you restart the server? Everything is back to the way it was before.
+If you try to navigate around, you'll find that the behavior is kind of funky. You can create new pets and view them, but what if you try to edit a pet? Everything is back to the way it was before.
 
 To understand what is going on, let's do what we have to do every time we start with a new code base. We have to *READ IT*.
 
@@ -62,5 +84,15 @@ Here are some characteristics of this project:
 What other characteristics can you find?
 
 > [action]
-> Before moving on complete this challenge:
+> Before moving on complete the following:
 > Are there any middleware that you do not recognize in `server.js`? Google them and comment your code with what they do.
+
+Before we move on, let's make our first commit:
+
+>[action]
+>
+```bash
+git add .
+git commit -m 'cloned starter and added comments'
+git push origin master -u
+```

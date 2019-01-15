@@ -24,44 +24,63 @@ In order to accomplish this pattern we have to take the following steps:
 # Sign Up for AWS
 
 Navigate to the AWS Console and create an account.
+## Get an AWS Console Account
+[Sign up for an AWS console account](https://aws.amazon.com/console/) by navigating to the link and clicking the **Create a Free Account** button.
 
-1. Get an AWS console account
-1. Get our API public and secret keys and save them in our `.env` folder.
-1. Make a new "bucket" in AWS S3 - make sure this is in the N. California location.
+Select "Personal" when asked for account type and fill out the required information.
 
-# Multipart Form Data
+After confirming your account, make sure to select the **Basic Plan**, which is the **Free** one. **If you don't choose Basic, your credit card you submitted will be charged**.
 
-Now let's set our form to submit `multipart/form-data` so we can submit a file along with other inputs.
+Finally, on the confirmation page, click the **Sign into Console** button, and put in your email/password that you just created.
 
+## Get our Access Key ID and Secret access keys
 
-```pug
+1. Once you're signed in, under the **Find Services** searchbar, search for **IAM** and select the service.
+1. Click **Activate MGA on your root account** and then select **Manage MFA**
+1. In the modal, select **Get Started with IAM Users**
+1. In the top left, select **Add user**
+1. Give `petepet` as the **User name**
+1. Under **Access Type** Select the **Programmatic access**. From there click the **Next:Permissions** button
+1. On the following page, make sure **Add user to group** is selected and then select **Create Group**
+1. Give it a **Group name** of `Admin`, and then check the box next to the `AdministratorAccess` policy. Then select **Create Group**
+1. From here you should be brought back to the groups page and your newly created group should be selected under the **Add user to group** section. Now select **Next:Tags**
+1. Skip the tags (we won't need it) and just select **Next: Review**
+1. Make sure everything looks correct, and then select **Create User**
 
+You should now have a user that has both an **Access Key ID** and a **Secret access key**.
+
+>[action]
+> In your project folder, create a `.env` file. Then copy the **Access Key ID** and **Secret access key** values into the file in this format, replacing `ACCESSKEYID` and `SecRETAcCeSskEY` with your user's values:
+>
+```
+AWS_ACCESS_KEY_ID=ACCESSKEYID
+AWS_SECRET_ACCESS_KEY=SecRETAcCeSskEY
 ```
 
+Once you're done with this, go back to your browser and select **Close** on the Success screen.
 
-So what does it mean to have our form send `multipart/form-data`?
+## Make a new "bucket" in AWS S3
 
-*The following is from [this](https://stackoverflow.com/questions/4526273/what-does-enctype-multipart-form-data-mean) StackOverflow answer.*
+1. Start by navigating [back to your console](https://console.aws.amazon.com/s3/)
+1. Choose **Create bucket**
+1. Provide a **bucket name** of `petepetemporium`
+1. Select under **Region**, select `US West (N. California)`
+1. Select **Next**
+1. On the **Properties** screen, don't select any of the options and just press **Next**. More info on the properties can be found [here](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)
+1. Stick with the recommended settings on the **Public access settings for this bucket** page and press **Next**
+1. Review your bucket, making sure the **Region** is set to `US West (N. California)`, and then select **Create bucket**
 
-> What does enctype='multipart/form-data' mean in an HTML form and when should we use it?
+Finally, make sure to add the **default region** and **bucket** to your `.env` file.
 
-When you make a POST request, you have to encode the data that forms the body of the request in some way.
+>[action]
+> Add the following to lines to your `.env` file:
+>
+```
+AWS_DEFAULT_REGION=us-west-1
+AWS_BUCKET=petepetemporium
+```
 
-HTML forms provide three methods of encoding.
-
-* application/x-www-form-urlencoded (the default)
-* multipart/form-data
-* text/plain
-
-Work was being done on adding application/json, but that has been abandoned.
-
-The specifics of the formats don't matter to most developers. The important points are:
-
-When you are writing client-side code, all you need to know is use multipart/form-data when your form includes any <input type="file"> elements.
-
-When you are writing server-side code: Use a prewritten form handling library and it will take care of the differences for you. Don't bother trying to parse the raw input received by the server.
-
-*Never use text/plain.*
+Alright! We're all set up with AWS now!
 
 # Adding Middleware: s3-uploader
 

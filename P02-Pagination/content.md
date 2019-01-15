@@ -267,4 +267,4 @@ git push
 
 Now can you make sure that the `/search` results are also paginated?
 
-Once you have those paginated, move on to the next chapter.
+Once you have those paginated, move on to the next chapter (but not before you do one more **Commit** for your paginated search!).

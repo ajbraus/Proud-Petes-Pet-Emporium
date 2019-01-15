@@ -71,7 +71,7 @@ Reload, and click the button. We get a nice widget model asking for a bunch of i
 
 This is just a test form though, so let's update it so that it works with our server.
 
-## Customizing the Checkout Widget
+# Customizing the Checkout Widget
 
 What should replace `/your-server-side-code`? What should we name that route? This would not be a strict RESTful and Resourceful route, but we should do our best to follow these conventions.
 
@@ -123,7 +123,7 @@ Change the `data-name` in the purchase form in `/views/pets-show.pug` to Proud P
 data-name="Proud Pete's Pet Emporium"
 ```
 
-## Test Checkout
+# Test Checkout
 
 Now you can submit the test credit card number `4242 4242 4242 4242`. For expiration date, you can submit any valid date in the future, any random number for the CVC number, and any 5-digit number for the zip code. You can get more from [Stripe's test cards doc](https://stripe.com/docs/testing#cards).
 
@@ -175,13 +175,21 @@ app.post('/pets/:id/purchase', (req, res) => {
 });
 ```
 
-### Testing A Purchase
+# Testing A Purchase
 
 Once your route is wired up, try submitting a payment now and make sure it runs successfully and that you're redirected to the `/pets/show` page.
 
 Now check your [stripe payments](https://dashboard.stripe.com/test/payments) to see if the payment went through!
 
-### Further Customization: Price & Description
+# Now Commit
+
+```bash
+git add .
+git commit -m 'Implemented Stripe Payments'
+git push
+```
+
+# Further Customization: Price & Description
 
 It is clear now that the Pet model needs another attribute: a price. Add this as an integer called `price`. Can you set it in the seed.js and rerun it to see the database.
 

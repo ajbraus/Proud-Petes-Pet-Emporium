@@ -55,8 +55,8 @@ To test that your server is responding with both HTML and JSON, add additional t
 ```js
   it('should list ALL pets on /pets GET', (done) => {
     chai.request(server)
+        .get('/')
         .set('content-type', 'application/json')
-        .get('/pets')
         .end(function(err, res){
           res.should.have.status(200);
           res.should.be.json;

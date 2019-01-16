@@ -53,7 +53,7 @@ In addition to this change, you'll have to tell your mobile developer, or your f
 To test that your server is responding with both HTML and JSON, add additional tests for the JSON responses that look like this (for Option #2):
 
 ```js
-  it('should list ALL pets on /pets GET', (done) => {
+  it('should list ALL pets on /pets GET', function(done) {
     chai.request(server)
         .get('/')
         .set('content-type', 'application/json')

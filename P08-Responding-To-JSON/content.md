@@ -25,7 +25,7 @@ In each of these routes they don't use the `res.render()` function which would r
 
 ```js
 // return res.render('pets-index', { pets: pets });
-return res.render('pets-index', { pets: pets });
+return res.json({ pets: pets });
 ```
 
 # Option 2 (shortcut) - Detecting JSON Requests

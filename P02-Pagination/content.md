@@ -79,24 +79,7 @@ PetSchema.plugin(mongoosePaginate);
 module.exports = mongoose.model('Pet', PetSchema);
 ```
 
-Now we can use this verbose formulation to craft our paginated query of pets:
-
-```js
-var query = {};
-var options = {
-  // select: 'title date author',
-  // sort: { date: -1 },
-  // populate: 'author',
-  limit: 10,
-  page: 0
-};
-
-Pet.paginate(query, options).then(function(result) {
-  // ...
-});
-```
-
-To do a smoke test of this working let's set the limit to 3 and use the new `.paginate()` function on our model in the `/` route query.
+To do a smoke test of this working let's use the new `.paginate()` function on our model in the `/` route query.
 
 >[action]
 > Update `/routes/index/get` in `index.js` to be the following:
@@ -112,7 +95,7 @@ app.get('/', (req, res) => {
 });
 ```
 
-Notice that mongoose-paginate returns only a `results` variable that has these properties.
+Mongoose-paginate returns only a `results` variable that has these properties:
 
 ```js
 result.docs // the array of records on the current page
@@ -122,7 +105,7 @@ result.page // the current page
 result.pages // the total number of pages
 ```
 
-The `docs` node is our array:
+The `docs` node is our array that will contain our Pets that we'll display:
 
 ```
 { docs:

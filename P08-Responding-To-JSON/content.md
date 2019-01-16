@@ -39,7 +39,7 @@ If you are building something that is unfunded, small, and lean and you want to 
 return res.render('pets-index', { pets: pets });
 
 // WITH
-if (req.header('Content-Type') == 'application/json') {
+if (req.header('content-type') == 'application/json') {
   return res.json({ pets: pets, categories: categories });
 } else {
   return res.render('pets-index', { pets: pets });
@@ -60,7 +60,7 @@ To test that your server is responding with both HTML and JSON, add additional t
         .end(function(err, res){
           res.should.have.status(200);
           res.should.be.json;
-          res.body.should.be.a('array');
+          res.body.should.be.a('object');
           done();
         });
   });

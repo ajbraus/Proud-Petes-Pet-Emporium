@@ -288,6 +288,14 @@ Finally, let's customize the `/pets/:id/purchase` route to include the price. **
 
 Try making a purchase and see if your Stripe dashboard updates with the correct price and description.
 
+# Now Commit
+
+```bash
+git add .
+git commit -m 'Implemented payment'
+git push
+```
+
 # Stretch Challenge: Save Who Bought the Pet
 
 If you're itching for more, check out the below challenge:

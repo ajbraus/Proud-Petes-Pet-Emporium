@@ -191,13 +191,102 @@ git push
 
 # Further Customization: Price & Description
 
-It is clear now that the Pet model needs another attribute: a price. Add this as an integer called `price`. Can you set it in the seed.js and rerun it to see the database.
+It is clear now that the Pet model needs another attribute: a price. Add this as an integer called `price`.
 
-Also update the new and edit form to include `price`.
+>[action]
+> Update `seed.js` so that each pet has an integer price. Then re-run `seed` in the terminal. Here's an example price:
+>
+```js
+"price": 10
+```
 
-Now customize the `/pets/:id/purchase` to include the price. **Reminder** - multiply the price by 100 to get the price in cents.
+Now we should update our model to include the price for all pets going forward
 
-Make the description the Pet's name and species.
+> [action]
+> Update `/models/pet.js` to include a `price` in the schema:
+>
+```js
+...
+>
+const PetSchema = new Schema({
+  name: { type: String, required: true }
+  , birthday: {type: String, required: true }
+  , species: { type: String, required: true }
+  , picUrl: { type: String, required: true }
+  , picUrlSq: { type: String, required: true }
+  , favoriteFood: { type: String, required: true }
+  , description: { type: String, minlength: 140, required: true }
+  , price: {type: Number, required: true }
+}
+...
+```
+
+Now let's update our views to include `price`:
+
+>[action]
+> Update the `form` on both `/views/pets-new.pug` and `/views/pets-edit.pug` to include a new `.form-group` object for  `price`:
+>
+```js
+>
+...
+.form-group
+  label Price*
+  textarea.form-control(name="price" required type="number")
+```
+
+Next we'll update our `show` view to include the pet's price in the Stripe modal, as well as putting in a hidden `input` to pass the pet's `id` to the controller, which we'll use in a bit:
+
+> [action]
+> Update `/views/pets-show.pug` to use the pet's price and send the pet's `id` to the controller
+>
+```js
+form(action=`/pets/${pet._id}/purchase`, method='POST')
+  script.stripe-button(src='https://checkout.stripe.com/checkout.js',
+  data-key=PUBLIC_STRIPE_API_KEY,
+  data-amount=pet.price*100,
+  data-name="Proud Pete's Pet Emporium",
+  data-description='Widget',
+  data-image='https://stripe.com/img/documentation/checkout/marketplace.png',
+  data-locale='auto',
+  data-zip-code='true')
+  input.form-control(type="hidden" value=pet._id name="petId")
+```
+
+Finally, let's customize the `/pets/:id/purchase` route to include the price. **Reminder** - multiply the price by 100 to get the price in cents. Let's also make the payment description the Pet's `name` and `species`.
+
+>[action]
+> Update the `/pets/:id/purchase` route in `/routes/pets.js` to the following:
+>
+```js
+// PURCHASE
+  app.post('/pets/:id/purchase', (req, res) => {
+    console.log(req.body);
+    // Set your secret key: remember to change this to your live secret key in production
+    // See your keys here: https://dashboard.stripe.com/account/apikeys
+    var stripe = require("stripe")("sk_test_Loz6xPRc7Tl8c6OCkyZMAEkE");
+>
+    // Token is created using Checkout or Elements!
+    // Get the payment token ID submitted by the form:
+    const token = req.body.stripeToken; // Using Express
+>
+    Pet.findById(req.body.petId).exec((err, pet) => {
+      const charge = stripe.charges.create({
+        amount: pet.price * 100,
+        currency: 'usd',
+        description: `Purchased ${pet.name}, ${pet.species}`,
+        source: token,
+      }).then((chg) => {
+        res.redirect(`/pets/${req.params.id}`);
+        });
+      })
+        .catch(err => {
+          console.log('Error: ' + err);
+        });
+    })
+  });
+```
+
+Try making a purchase and see if your Stripe dashboard updates with the correct price and description.
 
 # Save Who Bought the Pet
 

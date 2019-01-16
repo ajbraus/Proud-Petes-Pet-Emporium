@@ -288,10 +288,13 @@ Finally, let's customize the `/pets/:id/purchase` route to include the price. **
 
 Try making a purchase and see if your Stripe dashboard updates with the correct price and description.
 
-# Save Who Bought the Pet
+# Stretch Challenge: Save Who Bought the Pet
 
-Now that the pet is saved, we better mark that the pet was saved by setting the current date and time on a new pet attribute: `purchased_at`.
+If you're itching for more, check out the below challenge:
 
-Now mark all pets that are purchased as "Purchased!" in green text (using boostrap's `text-success` class).
-
-Also if a pet is purchased, do not show the Checkout button.
+>[challenge]
+> Now that the pet is saved, we better mark that the pet was saved by setting the current date and time on a new pet attribute: `purchased_at`.
+>
+> Once you have that, mark all pets that are purchased as "Purchased!" in green text (using boostrap's `text-success` class).
+>
+> Also if a pet is purchased, do not show the Checkout button.

@@ -248,6 +248,92 @@ git push
 
 # Paginate Search
 
-Now can you make sure that the `/search` results are also paginated?
+Now let's make sure that the `/search` results are also paginated!
 
-Once you have those paginated, move on to the next chapter (but not before you do one more **Commit** for your paginated search!).
+## Update the Route
+First thing is to remember that the first parameter to the `paginate` function is a query. Right now it's empty, but what we can do instead is to take our existing `$or` query and put it as that query parameter for `paginate`!
+
+> [action]
+> Update the `/search` route in `/routes/pets.js` to the following:
+>
+```js
+// SEARCH PET
+  app.get('/search', (req, res) => {
+>
+    const term = new RegExp(req.query.term, 'i')
+>
+    const page = req.query.page || 1
+    Pet.paginate(
+      {
+        $or: [
+          { 'name': term },
+          { 'species': term }
+        ]
+      },
+      { page: page }).then((results) => {
+        res.render('pets-index', { pets: results.docs, pagesCount: results.pages, currentPage: page });
+      });
+  });
+```
+
+See what we did there? Instead of calling `Pet.find()`, we just took the query from it and had `paginate` use it!
+
+This doesn't quite work though. The first page will look fine, but if you navigate to a different page, how do we remember what the term was? Let's pass it within `res.render` along with everything else.
+
+>[action]
+> Update your `res.render` call in the `/search` route in `/routes/pets.js` to include the search term:
+>
+```js
+res.render('pets-index', { pets: results.docs, pagesCount: results.pages, currentPage: page, term: req.query.term });
+```
+
+Why are we passing the original term and not our RegExp? Because we need the view to populate the correct URL, and it needs a string to do that!
+
+## Update the View
+
+Run a search on the website. Notice the url and how it captures the search term via `?term=[search-term]`? We want to make sure this gets added on to the url in addition to the page number. However, we only want to do it if a search term exists (we don't want to do this if we just navigate home, for example).
+
+Pug let's us solve this with a simple conditional!
+
+>[action]
+> Update your `ul.pagination` element in `/views/pets-index.pug` to the following. Make sure your indentation is correct!
+>
+```pug
+ul.pagination
+  if currentPage > 1
+>
+    li.page-item
+      if term
+        a.page-link(href=`?term=${term}&page=${currentPage - 1}`) Previous
+      else
+        a.page-link(href=`?page=${currentPage - 1}`) Previous
+>
+  - var i = 1;
+  while i <= pagesCount
+    li.page-item
+      if term
+        a.page-link(href=`?term=${term}&page=${i}`)= i++
+      else
+        a.page-link(href=`?page=${i}`)= i++
+>
+  if currentPage < pagesCount
+    li.page-item
+      if term
+        a.page-link(href=`?term=${term}&page=${parseInt(currentPage) + 1}`) Next
+      else
+        a.page-link(href=`?page=${parseInt(currentPage) + 1}`) Next
+```
+
+Try searching for something that will give lots of results (like the letter "r"). Those are some nice looking pages you got there!
+
+Once you're all good and paginated, move on to the next chapter (but not before you do one more **Commit** for your paginated search!).
+
+# Now Commit
+
+```bash
+git add .
+git commit -m 'Implemented search pagination'
+git push
+```
+
+Onward!

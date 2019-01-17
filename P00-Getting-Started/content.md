@@ -3,7 +3,11 @@ title: "Getting Started: Reading Code"
 slug: getting-started
 ---
 
-This tutorial will walk you through adding the most common advanced features to an Express.js server. By the end of this tutorial, you should be able to add the following features to an Express.js server:
+This tutorial will walk you through adding the most common advanced features to an Express.js server.
+
+# Learning Outcomes
+
+By the end of this tutorial, you should be able to add the following features to an Express.js server:
 
  * Simple Search
  * Pagination
@@ -11,7 +15,8 @@ This tutorial will walk you through adding the most common advanced features to 
  * Error and success messages
  * Uploading images and files
  * Adding payment gateways like Stripe
- * Sending emails (and more!).
+ * Sending emails
+ * Respond to JSON
 
 ### Outside In Philosophy & Vaporware
 

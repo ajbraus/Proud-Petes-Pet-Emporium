@@ -7,7 +7,10 @@ So now what if we wanted to search for a certain species of dog? or for the name
 
 **Search** usually means you enter a search term and the server queries the database and responds with a subset of records and displays them.
 
-Here we will be adding **Simple Search** meaning that we will be contacting the server with a request with a search term, the server will make a request using only a sort of **fuzzy keyword lookup** using **Regular Expressions** on one parameter. We will see there is a way to extend simple search to work for multiple parameters.
+Here we will be adding **Simple Search** meaning that we will be contacting the server with a request with a search term, the server will make a request using **Regular Expressions** on one parameter. We will see there is a way to extend simple search to work for multiple parameters.
+
+>[info]
+> Remember, we use *Regular Expressions* to match strings against a pattern (the regular expression) that we define. This is helpful for searching because then we can return only strings matching a specific pattern
 
 Chapter 7 will cover **Full Text Search**. Full text search allows you to search for multiple words across the whole text of a parameter (even a block of text) and any parameters with various search weights attached to each. MongoDB and other document-based databases ship with the ability to add full text search natively. SQL databases need a secondary service such as [Sphinx](http://sphinxsearch.com/) or [Apache Lucene](https://lucene.apache.org/) to achieve full text search.
 

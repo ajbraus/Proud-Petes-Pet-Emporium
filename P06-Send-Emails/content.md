@@ -33,6 +33,7 @@ npm install nodemailer nodemailer-mailgun-transport --save
 ```
 >
 > Now update `server.js` to include these modules:
+>
 ```js
 // server.js
 ...
@@ -46,7 +47,7 @@ const auth = {
     domain: 'domain.com'
   }
 }
-
+>
 const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 ```
 
@@ -152,6 +153,7 @@ Once emails are sending, see if you can display the `user` name and age with han
 >[solution]
 >
 > Updates to `email.handlebars`:
+>
 ```html
 <!doctype html>
 <html lang="en">
@@ -179,14 +181,14 @@ Move the email code so an email is sent to your email address whenever a pet is 
 ```js
 const nodemailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
-
+>
 const auth = {
   auth: {
     api_key: process.env.MAILGUN_API_KEY,
     domain: process.env.EMAIL_DOMAIN
   }
 }
-
+>
 const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 ```
 >
@@ -198,39 +200,47 @@ const nodemailerMailgun = nodemailer.createTransport(mg(auth));
     console.log(req.body);
     // Set your secret key: remember to change this to your live secret key in production
     // See your keys here: https://dashboard.stripe.com/account/apikeys
-    var stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
+    var stripe = require("stripe")("sk_test_Loz6xPRc7Tl8c6OCkyZMAEkE");
 >
     // Token is created using Checkout or Elements!
     // Get the payment token ID submitted by the form:
     const token = req.body.stripeToken; // Using Express
 >
-    const charge = stripe.charges.create({
-      amount: 999,
-      currency: 'usd',
-      description: 'Example charge',
-      source: token,
-    }).then(() => {
-      const user = {
-        email: req.body.stripeEmail
-      };
->
-      nodemailerMailgun.sendMail({
-        from: 'no-reply@example.com',
-        to: user.email, // An array if you have multiple recipients.
-        subject: 'Pet Purchased!',
-        template: {
-          name: 'email.handlebars',
-          engine: 'handlebars',
-          context: user
-        }
-      }).then(info => {
-        console.log('Response: ' + info);
-        res.redirect(`/pets/${req.params.id}`);
-      }).catch(err => {
-        console.log('Error: ' + err);
-        res.redirect(`/pets/${req.params.id}`);
-      });
-    });
+    Pet.findById(req.body.petId).exec((err, pet) => {
+      const charge = stripe.charges.create({
+        amount: pet.price * 100,
+        currency: 'usd',
+        description: `Purchased ${pet.name}, ${pet.species}`,
+        source: token,
+      }).then((chg) => {
+      // Convert the amount back to dollars for ease in displaying in the template
+        const user = {
+          email: req.body.stripeEmail,
+          amount: chg.amount / 100,
+          petName: pet.name
+        };
+        // After we get the pet so we can grab it's name, then we send the email
+        nodemailerMailgun.sendMail({
+          from: 'no-reply@example.com',
+          to: user.email, // An array if you have multiple recipients.
+          subject: 'Pet Purchased!',
+          template: {
+            name: 'email.handlebars',
+            engine: 'handlebars',
+            context: user
+          }
+        }).then(info => {
+          console.log('Response: ' + info);
+          res.redirect(`/pets/${req.params.id}`);
+        }).catch(err => {
+          console.log('Error: ' + err);
+          res.redirect(`/pets/${req.params.id}`);
+        });
+      })
+        .catch(err => {
+          console.log('Error: ' + err);
+        });
+    })
   });
 ```
 >
@@ -245,7 +255,9 @@ const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 </head>
 <body>
     <div class="container">
-        <p>Congrats on your pet purchase! Proud Pete's Pet Emporium thanks you!</p>
+        <p>Congrats on your new pet, {{petName}}!</p>
+        <p>You Paid ${{amount}}</p>
+        <p>Proud Pete's Pet Emporium thanks you!</p>
     </div>
 </body>
 </html>

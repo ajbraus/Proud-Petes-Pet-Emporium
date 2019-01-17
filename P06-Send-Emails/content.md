@@ -29,7 +29,7 @@ You know what to do:
 > Install the `nodemailer` and `nodemailer-mailgun-transport` modules
 >
 ```bash
-npm install nodemailer nodemailer-mailgun-transport --save
+$ npm install nodemailer nodemailer-mailgun-transport --save
 ```
 >
 > Now update `server.js` to include these modules:
@@ -121,7 +121,7 @@ If you try and run that, it will probably throw an error because there is no `em
 > First install `handlebars`:
 >
 ```bash
-npm install handlebars express-handlebars --save
+$ npm install handlebars express-handlebars --save
 ```
 >
 > Next in your root project folder, create an `email.handlebars` file and place the following code in it:
@@ -270,7 +270,7 @@ Great work! Let's commit and move forward!
 # Now Commit
 
 ```bash
-git add .
-git commit -m 'Implemented Emails'
-git push
+$ git add .
+$ git commit -m 'Implemented Emails'
+$ git push
 ```

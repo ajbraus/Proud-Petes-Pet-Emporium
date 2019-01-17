@@ -105,9 +105,8 @@ Now that we are submitting multipart/form-data we need to parse it using `multer
 > Let's install the middleware:
 >
 ```bash
-brew install imagemagick
->
-npm install multer s3-uploader --save
+$ brew install imagemagick
+$ npm install multer s3-uploader --save
 ```
 
 Now let's load our modules, but not in `server.js` because we don't need it for the whole app, just in the specific route. So we'll load them right in the controller where we'll use it: `pets.js`.
@@ -325,9 +324,9 @@ Congrats on getting AWS S3 up and running with your code! That's no small feat. 
 # Now Commit
 
 ```bash
-git add .
-git commit -m 'Implemented S3 file uploads'
-git push
+$ git add .
+$ git commit -m 'Implemented S3 file uploads'
+$ git push
 ```
 
 # Stretch Challenge

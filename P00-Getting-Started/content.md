@@ -97,7 +97,7 @@ Before we move on, let's make our first commit:
 >[action]
 >
 ```bash
-git add .
-git commit -m 'cloned starter and added comments'
-git push origin master -u
+$ git add .
+$ git commit -m 'cloned starter and added comments'
+$ git push origin master -u
 ```

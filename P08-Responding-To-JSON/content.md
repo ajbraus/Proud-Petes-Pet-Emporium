@@ -65,3 +65,11 @@ To test that your server is responding with both HTML and JSON, add additional t
         });
   });
 ```
+
+# Now Commit
+
+```bash
+$ git add .
+$ git commit -m 'Implemented responding to JSON'
+$ git push
+```

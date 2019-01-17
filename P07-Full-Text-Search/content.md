@@ -16,9 +16,9 @@ Before we add an index to our model, let's make sure we're clear of indexes (sin
 > Make sure `nodemon` isn't running, and then clear the pre-existing index from your db. Run each of the comments sequentially:
 >
 ```bash
-mongo
-use petes-pets
-db.pets.dropIndex('animal_text_color_text_pattern_text_size_text');
+$ mongo
+$ use petes-pets
+$ db.pets.dropIndex('animal_text_color_text_pattern_text_size_text');
 ```
 
 If you run into a Mongo error where it says the index "already exists with different options", you will have to run this and delete the index that's causing problems before assigning a new one.
@@ -76,7 +76,7 @@ Now test your search and see if it is working the way you'd like. Remember we're
 # Now Commit
 
 ```bash
-git add .
-git commit -m 'Implemented Full Text Search'
-git push
+$ git add .
+$ git commit -m 'Implemented Full Text Search'
+$ git push
 ```

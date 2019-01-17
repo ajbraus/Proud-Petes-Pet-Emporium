@@ -266,9 +266,9 @@ Now you have client-side validations as a first line of defense to malformed dat
 # Now Commit
 
 ```bash
-git add .
-git commit -m 'Implemented validation'
-git push
+$ git add .
+$ git commit -m 'Implemented validation'
+$ git push
 ```
 
 Onward!

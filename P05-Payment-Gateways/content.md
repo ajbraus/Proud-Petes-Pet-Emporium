@@ -181,14 +181,6 @@ Once your route is wired up, try submitting a payment now and make sure it runs 
 
 Now check your [stripe payments](https://dashboard.stripe.com/test/payments) to see if the payment went through!
 
-# Now Commit
-
-```bash
-git add .
-git commit -m 'Implemented Stripe Payments'
-git push
-```
-
 # Further Customization: Price & Description
 
 It is clear now that the Pet model needs another attribute: a price. Add this as an integer called `price`.
@@ -291,9 +283,9 @@ Try making a purchase and see if your Stripe dashboard updates with the correct 
 # Now Commit
 
 ```bash
-git add .
-git commit -m 'Implemented payment'
-git push
+$ git add .
+$ git commit -m 'Implemented Stripe payment'
+$ git push
 ```
 
 # Stretch Challenge: Save Who Bought the Pet

@@ -53,7 +53,7 @@ Mongoose does not ship with pagination supported, but we can add it using the `m
 > Add the `mongoose-paginate` module
 >
 ```bash
-npm install mongoose-paginate --save
+$ npm install mongoose-paginate --save
 ```
 >
 > Now initialize it, set its defaults options, and add it as a plugin for `/models/pet.js`:
@@ -241,9 +241,9 @@ See if your pagination works!
 # Now Commit
 
 ```bash
-git add .
-git commit -m 'Implemented pagination on the home page'
-git push
+$ git add .
+$ git commit -m 'Implemented pagination on the home page'
+$ git push
 ```
 
 # Paginate Search

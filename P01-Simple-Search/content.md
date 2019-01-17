@@ -158,9 +158,9 @@ The only problem with this test is that it doesn't really check if the search re
 # Now Commit
 
 ```bash
-git add .
-git commit -m 'Users can search pets by name and breed'
-git push
+$ git add .
+$ git commit -m 'Users can search pets by name and breed'
+$ git push
 ```
 
 You've successfully implemented **Simple Search!** Let's move on to the next feature!

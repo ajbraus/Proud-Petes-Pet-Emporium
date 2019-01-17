@@ -207,10 +207,6 @@ After the pet is successfully saved, then we can save the image. We're going to 
         res.send({ pet: pet });
       }
     })
-    .catch((err) => {
-      // STATUS OF 400 FOR VALIDATIONS
-      res.status(400).send(err.errors);
-    });
   })
 ```
 
@@ -334,4 +330,7 @@ git commit -m 'Implemented S3 file uploads'
 git push
 ```
 
-Now that you're an expert in signing up for accounts online, let's do some more of that with payments!
+# Stretch Challenge
+
+>[challenge]
+> You got this working for new pets, but what about if you *edit* a pet? Make sure you can edit a pet, and that the avatar is a valid field in the form.

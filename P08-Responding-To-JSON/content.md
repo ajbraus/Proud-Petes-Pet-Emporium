@@ -66,6 +66,10 @@ To test that your server is responding with both HTML and JSON, add additional t
   });
 ```
 
+# Feedback and Review
+
+Please take a moment to rate your understanding of learning outcomes from this tutorial, and how we can improve it via our [tutorial feedback form](https://goo.gl/forms/I0vguSrQT57NY7jX2)
+
 # Now Commit
 
 ```bash

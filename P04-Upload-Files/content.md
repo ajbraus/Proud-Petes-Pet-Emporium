@@ -21,29 +21,44 @@ In order to accomplish this pattern we have to take the following steps:
 1. Save the image URL into the database
 1. Display the image using the URL
 
+# Disclaimer
+
+Amazon tends to update how their process on getting an AWS console account/creating S3 buckets fairly regularly. **As of 1/22/19, the below information is correct, but is subject to change.**
+
+Please reference the [AWS Documentation](https://docs.aws.amazon.com/index.html#lang/en_us) if you run into any trouble. Also please notify your instructor if anything is outdated or needs tweaking here.
+
 # Sign Up for AWS
 
 Navigate to the AWS Console and create an account.
 ## Get an AWS Console Account
 
 1. [Sign up for an AWS console account](https://aws.amazon.com/console/) by navigating to the link and clicking the **Create a Free Account** button.
-1. Select "Personal" when asked for account type and fill out the required information.
+![AWS Create Account](assets/aws-create-account.png)
+1. Fill out the account information form and then press **Continue**
+1. On the *Contact Information* page, select `Personal` when asked for account type and fill out the required information.
+![AWS Account Type](assets/aws-contact-info.png)
+1. Enter your credit card information. **Don't worry, you won't be charged as long as you don't exceed the [AWS Free Tier Limits](https://aws.amazon.com/free/) (which you shouldn't, since this is just a small, non-public web app)**
+1. Fill out the `Confirm your identity` form
 1. After confirming your account, make sure to select the **Basic Plan**, which is the **Free** one. **If you don't choose Basic, your credit card you submitted will be charged**.
-1. Finally, on the confirmation page, click the **Sign into Console** button, and put in your email/password that you just created.
+![AWS Support Plan](assets/aws-support-plan.png)
+1. Finally, on the confirmation page, click the **Sign into Console** button, and put in your email/password that you just created. You should see this screen once you're signed in:
+![AWS Console](assets/aws-console.png)
 
 ## Get our Access Key ID and Secret access keys
 
 1. Once you're signed in, under the **Find Services** searchbar, search for **IAM** and select the service.
-1. Click **Activate MGA on your root account** and then select **Manage MFA**
-1. In the modal, select **Get Started with IAM Users**
+![AWS IAM SEARCH](assets/aws-console-iam.png)
+1. Select **Users** from the sidebar
+![AWS IAM DASH](assets/aws-iam-dashboard.png)
 1. In the top left, select **Add user**
-1. Give `petepet` as the **User name**
-1. Under **Access Type** Select the **Programmatic access**. From there click the **Next:Permissions** button
-1. On the following page, make sure **Add user to group** is selected and then select **Create Group**
-1. Give it a **Group name** of `Admin`, and then search for `AmazonS3FullAccess`. Check the box next to the `AmazonS3FullAccess` policy. Then select **Create Group**
-1. From here you should be brought back to the groups page and your newly created group should be selected under the **Add user to group** section. Now select **Next:Tags**
+![AWS IAM ADD USER](assets/aws-iam-add-user.png)
+1. Give `petepet` as the **User name**, and  under **Access Type** Select the **Programmatic access**. From there click the **Next:Permissions** button
+![AWS IAM USER NAME](assets/aws-iam-username.png)
+1. On the following page, make sure **Attach exisiting policies directly** is selected and then search for `AmazonS3FullAccess`. Check the box next to the `AmazonS3FullAccess`, then select **Next:Tags**
+![AWS POLICIES](assets/aws-iam-policy.png)
 1. Skip the tags (we won't need it) and just select **Next: Review**
 1. Make sure everything looks correct, and then select **Create User**
+![AWS IAM SUMMARY](assets/aws-iam-policy.png)
 
 You should now have a user that has both an **Access Key ID** and a **Secret access key**.
 
@@ -57,18 +72,32 @@ AWS_SECRET_ACCESS_KEY=SecRETAcCeSskEY
 
 Once you're done with this, go back to your browser and select **Close** on the Success screen.
 
+## Backup Plan
+If for whatever reason those keys don't work, you can try making a key for your AWS root account instead. Follow these steps as a backup plan:
+
+1. From the home screen, select **Activate MFA on your root account** and then press **Manage MFA**
+![AWS CONSOLE MFA](assets/aws-console-mfa.png)
+1. On the popup, check the checkbox and then choose **Continue to Security Credentials**
+![AWS POPUP](assets/aws-popup.png)
+1. Select **Access keys (access key ID and secret access key)** and click the **Create New Access Key** button. Again noting this isn't the ideal way to do it, but it is a backup plan
+![AWS CREATE KEY](assets/aws-mfa-create-key.png)
+1. Click on **Show Access Key** in the popup
+![AWS ROOT KEY MODAL](assets/aws-root-key.png)
+
+You should now have the root **Access Key ID** and a **Secret access key**. Try using those in your `.env` file if your user ones don't work.
+
 ## Make a new "bucket" in AWS S3
 
-1. Start by navigating [back to your console](https://console.aws.amazon.com/s3/)
-1. Choose **Create bucket**
-1. Provide a **bucket name** of `petepetemporium`
-1. Select under **Region**, select `US West (N. California)`
-1. Select **Next**
+1. Start by navigating [back to your console](https://console.aws.amazon.com/s3/), and choose **Create bucket**
+![AWS CREATE BUCKET](assets/aws-create-bucket.png)
+1. Provide a **unique bucket name**, and under **Region**, select `US West (N. California)`. From there hit **Next**
+![AWS BUCKET NAME](assets/aws-bucket-name.png)
 1. On the **Properties** screen, don't select any of the options and just press **Next**. More info on the properties can be found [here](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)
 1. *Uncheck* all settings on the **Public access settings for this bucket** page and press **Next**
+![AWS UNCHECK](assets/aws-uncheck.png)
 1. Review your bucket, making sure the **Region** is set to `US West (N. California)`, and then select **Create bucket**
-1. Select your newly created bucket and navigate to the **Permissions** tab
-1. Click on **Bucket Policy** and paste in the following policy. Once you've done that, press **save**:
+![AWS BUCKET REVIEW](assets/aws-bucket-review.png)
+1. Select your newly created bucket and navigate to the **Permissions** tab. Click on **Bucket Policy** and paste in the following policy. Once you've done that, press **Save**:
 
 ```json
 {
@@ -79,11 +108,12 @@ Once you're done with this, go back to your browser and select **Close** on the 
             "Effect": "Allow",
             "Principal": "*",
             "Action": "s3:GetObject",
-            "Resource": "arn:aws:s3:::petepetemporium/*"
+            "Resource": "arn:aws:s3:::[YOUR_BUCKET_NAME]/*"
         }
     ]
 }
 ```
+![AWS BUCKET POLICY](assets/aws-bucket-policy.png)
 
 Finally, make sure to add the **region** and **bucket** to your `.env` file.
 
@@ -92,7 +122,7 @@ Finally, make sure to add the **region** and **bucket** to your `.env` file.
 >
 ```
 S3_REGION=us-west-1
-S3_BUCKET=petepetemporium
+S3_BUCKET=[YOUR_BUCKET_NAME]
 ```
 
 Alright! We're all set up with AWS now!

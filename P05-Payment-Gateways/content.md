@@ -31,6 +31,7 @@ Alright, we're registered!
 Now we need to get our Stripe public/private API keys.
 
 From your dashboard (where you should have landed after the previous section), click on **Get your API Keys**
+![STRIPE KEYS](assets/stripe-get-keys.png)
 
 Here you can see your API keys:
 

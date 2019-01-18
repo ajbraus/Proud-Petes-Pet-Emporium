@@ -27,10 +27,7 @@ Amazon tends to update how their process on getting an AWS console account/creat
 
 Please reference the [AWS Documentation](https://docs.aws.amazon.com/index.html#lang/en_us) if you run into any trouble. Also please notify your instructor if anything is outdated or needs tweaking here.
 
-# Sign Up for AWS
-
-Navigate to the AWS Console and create an account.
-## Get an AWS Console Account
+# Get an AWS Console Account
 
 1. [Sign up for an AWS console account](https://aws.amazon.com/console/) by navigating to the link and clicking the **Create a Free Account** button.
 ![AWS Create Account](assets/aws-create-account.png)
@@ -44,7 +41,7 @@ Navigate to the AWS Console and create an account.
 1. Finally, on the confirmation page, click the **Sign into Console** button, and put in your email/password that you just created. You should see this screen once you're signed in:
 ![AWS Console](assets/aws-console.png)
 
-## Get our Access Key ID and Secret access keys
+# Get our Access Key ID and Secret access keys
 
 1. Once you're signed in, under the **Find Services** searchbar, search for **IAM** and select the service.
 ![AWS IAM SEARCH](assets/aws-console-iam.png)
@@ -72,7 +69,7 @@ AWS_SECRET_ACCESS_KEY=SecRETAcCeSskEY
 
 Once you're done with this, go back to your browser and select **Close** on the Success screen.
 
-## Backup Plan
+## Backup Plan for Access Keys
 If for whatever reason those keys don't work, you can try making a key for your AWS root account instead. Follow these steps as a backup plan:
 
 1. From the home screen, select **Activate MFA on your root account** and then press **Manage MFA**
@@ -86,7 +83,7 @@ If for whatever reason those keys don't work, you can try making a key for your 
 
 You should now have the root **Access Key ID** and a **Secret access key**. Try using those in your `.env` file if your user ones don't work.
 
-## Make a new "bucket" in AWS S3
+# Make a new "bucket" in AWS S3
 
 1. Start by navigating [back to your console](https://console.aws.amazon.com/s3/), and choose **Create bucket**
 ![AWS CREATE BUCKET](assets/aws-create-bucket.png)

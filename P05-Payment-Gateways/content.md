@@ -26,7 +26,7 @@ In this tutorial we'll be using Stripe to process payments to buy some pets.
 
 Alright, we're registered!
 
-## Public/Private API Keys
+# Public/Private API Keys
 
 Now we need to get our Stripe public/private API keys.
 

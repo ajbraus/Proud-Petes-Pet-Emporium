@@ -56,19 +56,23 @@ const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 1. Head over to [Mailgun](https://wwww.mailgun.com) and create an account by clicking the **Sign Up** button
 1. Fill out the form with your information. Don't worry about the credit card number, you won't go over 10,000 emails
 1. Select **Concept Plan**, then click **Go To Dashboard**
+![MG CONCEPT PLAN](assets/mg-concept-plan.png)
 1. Check your email and verify your account, go through the verification code process
 1. From the Dashboard, you should see a **Getting Started** box. After you finish activating your account, click on **Add a custom domain**
-1. Enter `mg.pppemporium.com` and then click **Add Domain**. Now you have a domain! *Don't worry about verifying your domain for now.*
-1. Finally, on the dashboard you should see an **API Keys** section. Find the **Private API Key** and copy that.
+![MG DASH DOMAIN](assets/mg-dash-domain.png)
+1. Enter a unique domain name and then click **Add Domain**. Now you have a domain! *Don't worry about verifying your domain for now.*
+![MG ADD DOMAIN](assets/mg-add-domain.png)
+1. Finally, go back to the dashboard and scroll down. You should see an **API Keys** section. Find the **Private API Key** and copy that.
+![MG API KEY](assets/mg-api-key.png)
 
-Now That you have both your Private API key and domain, let's add them to the project.
+Now That you have both your **Private API key** and **domain**, let's add them to the project.
 
 >[action]
-> Add your Private API key and the  domain to your `.env` file. Replace `mailgun-private-api-key` with your actual Private API Key:
+> Add your Private API key and the  domain to your `.env` file. Replace the values with your actual MailGun API Key and Domain:
 >
 ```
 MAILGUN_API_KEY=mailgun-private-api-key
-EMAIL_DOMAIN=mg.pppemporium.com
+EMAIL_DOMAIN=mailgun-email-domain
 ```
 >
 > Now add those to your `auth` const in `server.js`

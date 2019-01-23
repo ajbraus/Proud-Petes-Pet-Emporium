@@ -120,7 +120,7 @@ if (document.querySelector('#new-pet')) {
 Finally, we update our server `/pets/create/` route to be ready to handle a `JSON` request:
 
 >[action]
-> Replace the current `create` route in `/controllers/pets.js` with the following:
+> Replace the current `create` route in `/routes/pets.js` with the following:
 >
 ```js
 // pets.js

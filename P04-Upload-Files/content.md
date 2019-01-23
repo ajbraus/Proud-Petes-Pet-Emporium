@@ -334,7 +334,7 @@ else
 ```pug
 ...
 if pet.avatarUrl
-  img.card-img-top(src=pet.avatarUrl + '-standard.', alt='Card image cap')
+  img.card-img-top(src=pet.avatarUrl + '-square.', alt='Card image cap')
 else
   img.card-img-top(src=pet.picUrlSq, alt='Card image cap')
 ...

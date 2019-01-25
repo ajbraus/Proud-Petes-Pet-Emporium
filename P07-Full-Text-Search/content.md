@@ -63,7 +63,7 @@ app.get('/search', function (req, res) {
         if (req.header('Content-Type') == 'application/json') {
           return res.json({ pets: pets });
         } else {
-          return res.render('pets-search', { pets: pets, term: req.query.term });
+          return res.render('pets-index', { pets: pets, term: req.query.term });
         }
       });
 });

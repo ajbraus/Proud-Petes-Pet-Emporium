@@ -211,6 +211,10 @@ const nodemailerMailgun = nodemailer.createTransport(mg(auth));
     const token = req.body.stripeToken; // Using Express
 >
     Pet.findById(req.body.petId).exec((err, pet) => {
+      if(err) {
+        console.log('Error: ' + err);
+        res.redirect(`/pets/${req.params.id}`);
+      }
       const charge = stripe.charges.create({
         amount: pet.price * 100,
         currency: 'usd',

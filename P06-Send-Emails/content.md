@@ -53,7 +53,7 @@ const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
 # Make a Mailgun Account & Add Credentials
 
-1. Head over to [Mailgun](https://wwww.mailgun.com) and create an account by clicking the **Sign Up** button
+1. Head over to [Mailgun](https://www.mailgun.com) and create an account by clicking the **Sign Up** button
 1. Fill out the form with your information. Don't worry about the credit card number, you won't go over 10,000 emails
 1. Select **Concept Plan**, then click **Go To Dashboard**
 ![MG CONCEPT PLAN](assets/mg-concept-plan.png)

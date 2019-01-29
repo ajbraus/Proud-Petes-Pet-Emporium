@@ -276,9 +276,9 @@ Finally, let's customize the `/pets/:id/purchase` route to include the price. **
         res.redirect(`/pets/${req.params.id}`);
         });
       })
-        .catch(err => {
-          console.log('Error: ' + err);
-        });
+      .catch(err => {
+        console.log('Error: ' + err);
+      });
     })
   });
 ```

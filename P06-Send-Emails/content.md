@@ -180,7 +180,8 @@ Now we don't want to send emails just whenever we send our app! We want to send 
 
 Move the email code so an email is sent to your email address whenever a pet is purchased.
 
->[action] move the `const` declarations from `server.js` to the top of `/routes/pets.js`:
+>[action]
+> move the `const` declarations from `server.js` to the top of `/routes/pets.js`:
 >
 ```js
 const nodemailer = require('nodemailer');
@@ -210,7 +211,6 @@ const nodemailerMailgun = nodemailer.createTransport(mg(auth));
     // Get the payment token ID submitted by the form:
     const token = req.body.stripeToken; // Using Express
 >
-
     // req.body.petId can become null through seeding,
     // this way we'll insure we use a non-null value
     let petId = req.body.petId || req.params.id;

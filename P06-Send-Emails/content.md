@@ -180,6 +180,8 @@ Now we don't want to send emails just whenever we send our app! We want to send 
 
 Move the email code so an email is sent to your email address whenever a pet is purchased.
 
+**IMPORTANT NOTE:** For the purpose of this tutorial we're going to be using the same email we set for the user's Stripe email: `req.body.stripeEmail`. If you want to use a different email, you'll need to implement a solution different from the one below.
+
 >[action]
 > move the `const` declarations from `server.js` to the top of `/routes/pets.js`:
 >

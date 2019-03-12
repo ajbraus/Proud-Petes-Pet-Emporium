@@ -302,8 +302,11 @@ $ git push
 If you're itching for more, check out the below challenge:
 
 >[challenge]
-> Now that the pet is saved, we better mark that the pet was saved by setting the current date and time on a new pet attribute: `purchased_at`.
 >
-> Once you have that, mark all pets that are purchased as "Purchased!" in green text (using boostrap's `text-success` class).
+> 1) Now that the pet is saved, we better mark that the pet was saved by setting the current date and time on a new pet attribute: `purchased_at`.
 >
-> Also if a pet is purchased, do not show the Checkout button.
+> 2) Once you finished challenge 1, mark all pets that are purchased as "Purchased!" in green text (using boostrap's `text-success` class).
+>
+> 3) If a pet is purchased, do not show the Checkout button.
+>
+> 4) Checkout.js is a great tool from Stripe that does a lot of the heavy lifting for you. If you want more customization though, you'll want to use [Stripe Elements](https://stripe.com/payments/elements). Note that you'll have to implement a lot of the payment flow work if you choose to use Elements. Check out the [quick start guide](https://stripe.com/docs/stripe-js/elements/quickstart) and some [examples](https://stripe.dev/elements-examples/) to get started!

@@ -1,11 +1,11 @@
 ---
-title: "Responding to JSON"
-slug: "responding-to-json"
+title: "Review - Responding to JSON"
+slug: "review-responding-to-json"
 ---
 
 So far we have built a web server, but we have not built an API. If we wanted to add a mobile app to this server, we'd be stuck. A mobile app, desktop app, or an independent front end app (maybe built with React) would need to send and receive JSON. Our server would need to **respond to JSON**.
 
-It turns out there are two ways to do this.
+As a closing to this tutorial, let's do a quick review of how to set this up. It turns out there are two ways to do this.
 
 # Detecting JSON Requests
 
@@ -81,10 +81,6 @@ In each of these routes they don't use the `res.render()` function which would r
 return res.json({ pets: pets });
 ```
 
-# Feedback and Review
-
-Please take a moment to rate your understanding of learning outcomes from this tutorial, and how we can improve it via our [tutorial feedback form](https://goo.gl/forms/I0vguSrQT57NY7jX2)
-
 # Now Commit
 
 ```bash
@@ -92,3 +88,7 @@ $ git add .
 $ git commit -m 'Implemented responding to JSON'
 $ git push
 ```
+
+# Feedback and Review
+
+Please take a moment to rate your understanding of learning outcomes from this tutorial, and how we can improve it via our [tutorial feedback form](https://goo.gl/forms/I0vguSrQT57NY7jX2)

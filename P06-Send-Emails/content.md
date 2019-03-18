@@ -11,6 +11,8 @@ Then we'll need to extend `nodemailer` with the [nodemailer-mailgun-transport](h
 
 This means we can use handlebars templates for rendering our emails!
 
+Lastly, we're going to try to make this code more modular. Rather than throwing it into our current routes or `server.js`, we'll make a new `mailer.js` file that will handle all mail related functions!
+
 # Make a Plan
 
 First off we'll make a plan of the outside-in, step-by-step process to get emails firing off.
@@ -23,7 +25,7 @@ First off we'll make a plan of the outside-in, step-by-step process to get email
 
 # Installing and Configuring nodemailer and nodemailer-mailgun-transport
 
-You know what to do:
+Before we start integrating `nodemailer` into our app, let's do some simple tests with it in `server.js` to make sure the functionality is correct.
 
 >[action]
 > Install the `nodemailer` and `nodemailer-mailgun-transport` modules
@@ -37,10 +39,12 @@ $ npm install nodemailer nodemailer-mailgun-transport --save
 ```js
 // server.js
 ...
+// require our mailgun dependencies
 const nodemailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
 ...
 >
+// auth with our mailgun API key and domain
 const auth = {
   auth: {
     api_key: 'key-keyaldkjfadfasdfadsfadsf',
@@ -48,6 +52,7 @@ const auth = {
   }
 }
 >
+// create a mailer
 const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 ```
 
@@ -93,7 +98,7 @@ Now we are ready to try to send our first email.
 Here's the code for sending an email with nodemailer transport:
 
 > [action]
-> Place this after your `nodemailerMailgun` declaration, remember to replace the `email` in `user` with your email so you can check it:
+> Place this after your `nodemailerMailgun` declaration in `server.js`, remember to replace the `email` in `user` with your email so you can check it:
 >
 ```js
 // SEND EMAIL
@@ -183,12 +188,16 @@ Move the email code so an email is sent to your email address whenever a pet is 
 **IMPORTANT NOTE:** For the purpose of this tutorial we're going to be using the same email we set for the user's Stripe email: `req.body.stripeEmail`. If you want to use a different email, you'll need to implement a solution different from the one below.
 
 >[action]
-> move the `const` declarations from `server.js` to the top of `/routes/pets.js`:
+> Create a new folder called `/utils`, and within it, a new file called `/utils/mailer.js`. Move the `const` declarations from `server.js` to the top of `/utils/mailer.js`:
 >
 ```js
+// mailer.js
+>
+// require our mailgun dependencies
 const nodemailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
 >
+// auth with our mailgun API key and domain
 const auth = {
   auth: {
     api_key: process.env.MAILGUN_API_KEY,
@@ -196,12 +205,51 @@ const auth = {
   }
 }
 >
+// create a mailer
 const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 ```
 >
-> Now move your `nodemailer` code from `server.js` to your `/purchase` route in `/routes/pets.js`:
+> Now move your `nodemailer` code from `server.js` to your `/utils/mailer.js` as well and export it as the `sendMail` function. You can remove the `user` const, as we'll be getting our user from the `/purchase` route:
 >
 ```js
+// export our send mail function
+module.exports.sendMail = (user, req, res) => {
+    // send an email to the user's email with a provided template
+    nodemailerMailgun.sendMail({
+        from: 'no-reply@example.com',
+        to: user.email, // An array if you have multiple recipients.
+        subject: 'Pet Purchased!',
+        template: {
+            name: 'email.handlebars',
+            engine: 'handlebars',
+            context: user
+        }
+    // One mail is sent, redirect to the purchased pet's page
+    }).then(info => {
+        console.log('Response: ' + info);
+        res.redirect(`/pets/${req.params.id}`);
+    // Catch error and redirect to the purchased pet's page
+    }).catch(err => {
+        console.log('Error: ' + err);
+        res.redirect(`/pets/${req.params.id}`);
+    });
+}
+```
+
+Finally, we need to use this code in our `/purchase` route, so let's do that integration.
+
+> [action]
+>
+> Update `/routes/pets.js` to include the `mailer` util and use it to send an email the purchase route
+>
+```js
+// MODELS
+const Pet = require('../models/pet');
+>
+const mailer = require('../utils/mailer');
+>
+...
+>
 // PURCHASE
   app.post('/pets/:id/purchase', (req, res) => {
     console.log(req.body);
@@ -234,23 +282,8 @@ const nodemailerMailgun = nodemailer.createTransport(mg(auth));
           amount: chg.amount / 100,
           petName: pet.name
         };
-        // After we get the pet so we can grab it's name, then we send the email
-        nodemailerMailgun.sendMail({
-          from: 'no-reply@example.com',
-          to: user.email, // An array if you have multiple recipients.
-          subject: 'Pet Purchased!',
-          template: {
-            name: 'email.handlebars',
-            engine: 'handlebars',
-            context: user
-          }
-        }).then(info => {
-          console.log('Response: ' + info);
-          res.redirect(`/pets/${req.params.id}`);
-        }).catch(err => {
-          console.log('Error: ' + err);
-          res.redirect(`/pets/${req.params.id}`);
-        });
+        // Call our mail handler to manage sending emails
+        mailer.sendMail(user, req, res);
       })
       .catch(err => {
         console.log('Error: ' + err);
@@ -289,3 +322,9 @@ $ git add .
 $ git commit -m 'Implemented Emails'
 $ git push
 ```
+
+# Stretch Challenge
+
+> [challenge]
+>
+> Update the purchase code in the `/purchase` route to be modular like `mailer`

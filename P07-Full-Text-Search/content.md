@@ -69,7 +69,7 @@ app.get('/search', function (req, res) {
 });
 ```
 
-# Now Test!
+# Product So Far: Now Test!
 
 Now test your search and see if it is working the way you'd like. Remember we're **not using Regex in the code above, so we will no longer match partial strings**
 

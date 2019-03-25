@@ -259,6 +259,8 @@ Finally let's finish off our validations by adding client-side validations into 
 ...
 ```
 
+# Product So Far
+
 Tool around with the form now and try to submit the form and see how the client-side validations look.
 
 Now you have client-side validations as a first line of defense to malformed data getting into your database. And if anything get's through those, the error will be caught by the model validations. Ain't no invalid data getting through that!

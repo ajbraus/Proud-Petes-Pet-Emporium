@@ -311,6 +311,8 @@ const mailer = require('../utils/mailer');
 </html>
 ```
 
+# Product So Far
+
 Now test this by purchasing a pet. Did you get an email?
 
 Great work! Let's commit and move forward!

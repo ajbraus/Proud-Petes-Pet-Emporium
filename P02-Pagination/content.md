@@ -324,6 +324,8 @@ ul.pagination
         a.page-link(href=`?page=${parseInt(currentPage) + 1}`) Next
 ```
 
+# Product So Far
+
 Try searching for something that will give lots of results (like the letter "r"). Those are some nice looking pages you got there!
 
 Once you're all good and paginated, move on to the next chapter (but not before you do one more **Commit** for your paginated search!).

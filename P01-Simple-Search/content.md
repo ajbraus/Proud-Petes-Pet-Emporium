@@ -42,6 +42,8 @@ nav.navbar.navbar-expand-sm.navbar-light.bg-light
       button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
 ```
 
+# Product So Far
+
 Make sure your homepage looks like this:
 
 ![search-form](assets/search-form.png)

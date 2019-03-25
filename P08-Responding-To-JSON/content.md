@@ -89,6 +89,10 @@ $ git commit -m 'Implemented responding to JSON'
 $ git push
 ```
 
-# Feedback and Review
+**Congrats on completing the multi-faceted store that is Proud Pete's Pet Emporium!** As you go through this BEW course, think about how you can tie the concepts you learned in this tutorial to the big ideas and concepts in the course itself.
+
+# Feedback and Review - 2 minutes
+
+**We promise this won't take longer than 2 minutes!**
 
 Please take a moment to rate your understanding of learning outcomes from this tutorial, and how we can improve it via our [tutorial feedback form](https://goo.gl/forms/I0vguSrQT57NY7jX2)

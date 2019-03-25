@@ -342,6 +342,9 @@ else
 
 **One important note**: in the above code snippets, notice the periods (`.`) after both `standard` and `square`. It's important to include that so that the image will *actually download* from the server and display. Otherwise you'll get a broken image!
 
+
+# Product So Far
+
 Try uploading a new pet using an avatar! Make sure your old pets all still display too.
 
 You should notice that an `uploads/` folder gets created. **Make sure to add `uploads` to your `.gitignore` file so you don't push up all your uploaded images to GitHub.**

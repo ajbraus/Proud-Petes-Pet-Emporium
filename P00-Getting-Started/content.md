@@ -3,7 +3,13 @@ title: "Getting Started: Reading Code"
 slug: getting-started
 ---
 
-This tutorial will walk you through adding the most common advanced features to an Express.js server.
+This tutorial will walk you through adding the some common advanced features to an Express.js server, such as pagination, adding payment gateways, and uploading files using S3.
+
+# Why Is This Important?
+
+There's a lot of different concepts we're throwing at you in this tutorial. We want you to get practice at a base level with some of these concepts, as you'll absolutely be using some number of these (if not all of them!) throughout your career. If you work on anything payments related, you'll need to know how a payment gateway works. If you want to upload files in your web app at all (and who doesn't?), you'll need to know how to do that with some tool (in this case S3 and AWS). Do you want pages in your app at all?
+
+This isn't everything you need to know for each topic, but it'll give you a foundation to build off of so that when you get assigned that payment flow, or file upload feature, you'll have a solid baseline to begin building from!
 
 # Learning Outcomes
 

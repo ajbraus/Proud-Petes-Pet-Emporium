@@ -287,6 +287,8 @@ Finally, let's customize the `/pets/:id/purchase` route to include the price. **
   });
 ```
 
+# Product So Far
+
 Try making a purchase and see if your Stripe dashboard updates with the correct price and description.
 
 # Now Commit

@@ -3,6 +3,24 @@ title: "Uploading Files to AWS S3"
 slug: "uploading-files"
 ---
 
+1. ~~Implement simple search on the store~~
+1. ~~Build out pagination~~
+1. ~~Implement validations, success, and error handling~~
+1. **Uploading files**
+    1. **Get an AWS console account**
+    1. **Get our API public and secret keys and save them in our `.env` folder.**
+    1. **Make a new "bucket" in AWS S3**
+    1. **Change the form to use `multipart/form-data`**
+    1. **Add some middleware to accept `multipart/form-data`: `multer`**
+    1. **Add some middleware to interact with the S3 API: `s3-uploader`**
+    1. **Initialize and use the middleware in the controller route.**
+    1. **Save the image URL into the database**
+    1. **Display the image using the URL**
+1. Integrating payment gateways
+1. Sending emails
+1. Building Full-text Search
+1. Responding to JSON
+
 Uploading files and especially images is a very common pattern, but it is not that simple. Since Heroku and many server solutions do not allow you to store a lot of data in them, we need to use a third party service to save off any files or images we want to have access to later.
 
 We'll be using **Amazon Web Services Simple Storage Service (AWS S3)** to save our images and files. This service's API will give us a unique URI we can use to retrieve the files later when we want to display them or download them.

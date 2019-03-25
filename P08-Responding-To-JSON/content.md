@@ -3,6 +3,17 @@ title: "Review - Responding to JSON"
 slug: "review-responding-to-json"
 ---
 
+1. ~~Implement simple search on the store~~
+1. ~~Build out pagination~~
+1. ~~Implement validations, success, and error handling~~
+1. ~~Uploading files~~
+1. ~~Integrating payment gateways~~
+1. ~~Sending emails~~
+1. ~~Building Full-text Search~~
+1. **Responding to JSON**
+    1. **Detect JSON Requests in addition to handling rendering as we did before**
+    1. **Test API endpoints**
+
 So far we have built a web server, but we have not built an API. If we wanted to add a mobile app to this server, we'd be stuck. A mobile app, desktop app, or an independent front end app (maybe built with React) would need to send and receive JSON. Our server would need to **respond to JSON**.
 
 As a closing to this tutorial, let's do a quick review of how to set this up. It turns out there are two ways to do this.

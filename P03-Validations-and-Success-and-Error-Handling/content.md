@@ -3,6 +3,19 @@ title: "Validation, Success, and Error Handling"
 slug: "validation-success-and-error-handling"
 ---
 
+1. ~~Implement simple search on the store~~
+1. ~~Build out pagination~~
+1. **Implement validations, success, and error handling**
+    1. **User puts in invalid data and hits submit.**
+    1. **Without navigating away, user sees specifically the form elements that still need work with directions for what to do.**
+    1. **User submits data that is still invalid (<1% of time)**
+    1. **User sees a general and generic error message that something has occurred.**
+1. Uploading files
+1. Integrating payment gateways
+1. Sending emails
+1. Building Full-text Search
+1. Responding to JSON
+
 A codebase can have various "smells". Smelly code is, as you can imagine, not a good thing. Right now this project is pretty clean all around in its architecture with good routing names, and virtually 100% test coverage, but it is very janky in the **Validations** and **Error/Success Handling** department.
 
 If you are making a hackathon project, or your project isn't live yet, you probably don't have to worry about these topics, but anything you want to take seriously, you should prioritize these two stories on your Kanban board:

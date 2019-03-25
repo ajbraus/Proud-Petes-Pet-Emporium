@@ -3,6 +3,20 @@ title: "Payment Gateways: Stripe"
 slug: "payment-gateways"
 ---
 
+1. ~~Implement simple search on the store~~
+1. ~~Build out pagination~~
+1. ~~Implement validations, success, and error handling~~
+1. ~~Uploading files~~
+1. **Integrating payment gateways**
+    1. **Sign up for Stripe and get our public/private access keys**
+    1. **Add the drop in stripe checkout**
+    1. **Add `stripe` middleware for interacting with the stripe API.**
+    1. **Process the payment on the server**
+    1. **Save when the pet was purchased and by whom**
+1. Sending emails
+1. Building Full-text Search
+1. Responding to JSON
+
 Everybody, eventually, has got to get paid. And the web is no different.
 
 Generally online payments are conducted using credit and debit cards. More recently people have learned to accept cryptocurrencies as well, but accepting crypto is for a future lesson if and when these electronic currencies become more widely used.

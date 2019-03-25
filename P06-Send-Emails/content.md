@@ -3,6 +3,20 @@ title: "Send Emails"
 slug: "send-emails"
 ---
 
+1. ~~Implement simple search on the store~~
+1. ~~Build out pagination~~
+1. ~~Implement validations, success, and error handling~~
+1. ~~Uploading files~~
+1. ~~Integrating payment gateways~~
+1. **Sending emails**
+    1. **Install and configure the `nodemailer` and `nodemailer-mailgun-transport` modules.**
+    1. **Sign up for an account with [Mailgun](https://www.mailgun.com)**
+    1. **Add your email credentials to your `.env` file.**
+    1. **Send a sample email**
+    1. **Setup emails to send whenever a pet is sold.**
+1. Building Full-text Search
+1. Responding to JSON
+
 Sending emails is a common requirement of any web service. And as you might expect, Express.js and Node.js makes it quite easy to send emails!
 
 You might use a gmail account for a minimum viable product, but gmail will only let you send ~500 emails per day. At that point you'll want a scalable option. [Mailgun](https://www.mailgun.com/) to the rescue!

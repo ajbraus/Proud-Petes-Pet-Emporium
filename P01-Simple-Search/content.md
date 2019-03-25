@@ -3,6 +3,19 @@ title: "Simple Search"
 slug: "simple-search"
 ---
 
+1. **Implement simple search on the store**
+    1. **Make a search form - one input field and button that submits a url structured like this `/search?term=poodle`**
+    1. **Make a `/search` route that responds with a template `pets-search.html` (we'll just reuse the `pets-index.pug` template)**
+    1. **Make the `/search` route actually search using our `Pet` model.**
+    1. **Write a test (if we were doing TDD (Test Driven Development) we'd start with this!)**
+1. Build out pagination
+1. Implement validations, success, and error handling
+1. Uploading files
+1. Integrating payment gateways
+1. Sending emails
+1. Building Full-text Search
+1. Responding to JSON
+
 So now what if we wanted to search for a certain species of dog? or for the name of a dog we met last week? Let's search!
 
 **Search** usually means you enter a search term and the server queries the database and responds with a subset of records and displays them.

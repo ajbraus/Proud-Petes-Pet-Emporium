@@ -3,6 +3,17 @@ title: "Full Text Search"
 slug: "full-text-search"
 ---
 
+1. ~~Implement simple search on the store~~
+1. ~~Build out pagination~~
+1. ~~Implement validations, success, and error handling~~
+1. ~~Uploading files~~
+1. ~~Integrating payment gateways~~
+1. ~~Sending emails~~
+1. **Building Full-text Search**
+    1. **Add an index/Remove Existing indexes**
+    1. **Update your search query to use full text instead of regex**
+1. Responding to JSON
+
 Mongo ships with native [Full Text Search](https://en.wikipedia.org/wiki/Full-text_search). All you have to do is add an **index** on the attributes you want to search on. You can even add **weights** to the various attributes, if you'd like to have text in the title to be worth more in the search than text in the content.
 
 # Add an index

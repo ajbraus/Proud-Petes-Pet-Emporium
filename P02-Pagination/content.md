@@ -3,6 +3,18 @@ title: "Pagination"
 slug: "pagination"
 ---
 
+1. ~~Implement simple search on the store~~
+1. **Build out pagination**
+    1. **We are going to add pagination to the `/` and `/search` routes first and those both use the `pets-index.pug` template, so we can use bootstrap's pagination snippet to start that.**
+    1. **Next we need to add the `mongoose-paginate` module  to extend Mongoose with pagination methods to only return pages of 10 pets.**
+    1. **Finally we need to write a test for both routes so that we can ship it!**
+1. Implement validations, success, and error handling
+1. Uploading files
+1. Integrating payment gateways
+1. Sending emails
+1. Building Full-text Search
+1. Responding to JSON
+
 One of the simplest ways to speed up a website is to use **Pagination**. Pagination just means "to add pages" to something.
 
 You have seen this before because Google has a very recognizable pagination system:

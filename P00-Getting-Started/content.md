@@ -24,7 +24,20 @@ By the end of this tutorial, you should be able to add the following features to
  * Sending emails
  * Respond to JSON
 
-### Outside In Philosophy & Vaporware
+# Technical Planning
+
+Here's how we're going to go about building out features in this tutorial:
+
+1. Implement simple search on the store
+1. Build out pagination
+1. Implement validations, success, and error handling
+1. Uploading files
+1. Integrating payment gateways
+1. Sending emails
+1. Building Full-text Search
+1. Responding to JSON
+
+# Outside In Philosophy & Vaporware
 
 We're going to build this whole app from the outside-in, meaning each step, we're always going to build what the user sees (the **views** or **templates**) first. We can even populate these with some mock data using arrays. This first step is called building **Vaporware** and is an excellent pattern that will save you time and improve your client and stakeholder happiness.
 

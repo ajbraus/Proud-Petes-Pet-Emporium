@@ -313,7 +313,7 @@ const PetSchema = new Schema({
   , avatarUrl: { type: String, required: true }
   , favoriteFood: { type: String, required: true }
   , description: { type: String, minlength: 140, required: true }
-}
+})
 ```
 
 Almost there, let's wrap this up with our views!

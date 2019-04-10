@@ -52,24 +52,37 @@ When prompted to commit, you'll see a sample commit message. Feel free to use yo
 
 Lastly, the commit prompts in this tutorial should be the **minimum** amount of times you commit. If you want to do more commits, breaking your chunks into even smaller chunks, that is totally fine!
 
-# Getting Started - Forking/Cloning the Starter Project
+# Getting Started - Cloning the Starter Project
 
 You won't always be starting with a **Green Field Project** - a project where you start from scratch - sometimes you'll work on a project that has already started. In this tutorial we'll simulate that by starting with a relatively simple starter project.
 
->[action]
-> Go to the [starter repo](https://github.com/Product-College-Labs/petes-pets) and **fork** the repo into your own personal account
-> ![fork-github](assets/fork-github.png)
-
-Doing this will allow you to commit/push/pull the changes you make to your own account. **It is very important you do the above step first before doing the below**.
-
-Once you have **forked** the repo, continue on to the next steps:
-
 > [action]
-> Clone the starter project from your fork
+> Go to the [starter repo](https://github.com/Product-College-Labs/petes-pets) and clone the repo locally
 >
 ```bash
-git clone [URL to your starter repo] petes-pets-tutorial
-cd petes-pets-tutorial
+$ git clone git@github.com:Make-School-Labs/petes-pets.git
+```
+
+Now we need to change the remote so that you can commit/push/pull the changes you make to your own repo. **It is very important you do the below steps in order to get everything working properly.**
+
+> [action]
+> Go to GitHub and create an _empty_, public repository called REPO-NAME, and now associate it as a remote for your cloned starter code, and then push to it.
+>
+```bash
+$ cd petes-pets
+# can grab the url from the "Clone or download" link on your repo page
+$ git remote set-url origin git@github.com:YOUR_USERNAME/REPO-NAME
+$ git push -u origin master
+```
+
+Go to your repo on GitHub and make sure your previously empty repo is now full with starter code! Now when you add/commit/push, it'll be to your repo!
+
+Once you have finished the above, continue on to the next steps:
+
+> [action]
+> Install your dependencies
+>
+```bash
 npm install
 ```
 

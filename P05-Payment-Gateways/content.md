@@ -319,7 +319,7 @@ If you're itching for more, check out the below challenge:
 
 >[challenge]
 >
-> 1) Now that the pet is saved, we better mark that the pet was saved by setting the current date and time on a new pet attribute: `purchased_at`.
+> 1) Now that the pet is saved, we better mark that the pet was saved by setting the current date and time on a new pet attribute: `purchasedAt`.
 >
 > 2) Once you finished challenge 1, mark all pets that are purchased as "Purchased!" in green text (using boostrap's `text-success` class).
 >

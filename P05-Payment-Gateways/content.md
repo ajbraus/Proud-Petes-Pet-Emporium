@@ -103,7 +103,7 @@ form(action=`/pets/${pet._id}/purchase`, method='POST')
 >
 ```js
 app.post('/pets/:id/purchase', (req,res) => {
-  console.log("purchase body:", ${req.body});
+  console.log(`purchase body: ${req.body}`);
 });
 ```
 

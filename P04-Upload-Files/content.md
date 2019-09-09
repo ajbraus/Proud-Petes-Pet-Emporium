@@ -380,4 +380,7 @@ $ git push
 # Stretch Challenge
 
 >[challenge]
-> You got this working for new pets, but what about if you *edit* a pet? Make sure you can edit a pet, and that the avatar is a valid field in the form.
+>
+> 1. You got this working for new pets, but what about if you *edit* a pet? Make sure you can edit a pet, and that the avatar is a valid field in the form.
+> 1. Right now, _anyone_ who accesses your website can make a New Pet. How can you change your AWS policies to only let you (or other users you authorize) create new pets?
+> 1. Following from the previous challenge, make the website user friendly so that unauthorized users who click on the New Pet button will not be allowed to navigate to the page, and will receive a notification stating why.

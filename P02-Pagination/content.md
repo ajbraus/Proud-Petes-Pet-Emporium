@@ -61,6 +61,8 @@ It doesn't do much right now... its totally static! We'll have to do some work t
 
 Mongoose does not ship with pagination supported, but we can add it using the `mongoose-paginate` module because [edwardhotchkiss](https://github.com/edwardhotchkiss/mongoose-paginate) made it!
 
+**NOTE:** This plugin will only work with Node.js >= 4.2 and Mongoose >= 4.2, so make sure both are updated accordingly.
+
 >[action]
 > Add the `mongoose-paginate` module
 >
@@ -88,6 +90,7 @@ const PetSchema = new Schema({
 >
 PetSchema.plugin(mongoosePaginate);
 >
+// This line is the same as before
 module.exports = mongoose.model('Pet', PetSchema);
 ```
 
@@ -106,6 +109,8 @@ app.get('/', (req, res) => {
   });
 });
 ```
+
+You should only see 3 dogs on the page. The pagination buttons won't work yet, don't worry, we're gonna build that out now!
 
 Mongoose-paginate returns only a `results` variable that has these properties:
 
@@ -149,8 +154,8 @@ We're going to call it `page`.
 
 ```
 http://localhost:3000/
-http://localhost:3000/?page=3
 http://localhost:3000/?page=2
+http://localhost:3000/?page=3
 ```
 
 >[action]
@@ -169,7 +174,15 @@ app.get('/', (req, res) => {
 
 Notice that we're using the `||` or `or` operator to make sure there is always a value for `page`. In JavaScript and some other languages, the `||` operator will evaluate to it's "truthy" value, meaning if `req.query.page` is `null` or `undefined`, `page` will be equal to `1`.
 
-Test out if the above `localhost` urls are working.
+> [action]
+>
+> Test out if the following `localhost` urls are working by typing them directly into your browser:
+>
+```
+http://localhost:3000/
+http://localhost:3000/?page=2
+http://localhost:3000/?page=3
+```
 
 # Pagination Navigation Snippet (Part Deux)
 
@@ -208,7 +221,7 @@ nav(aria-label='Page navigation example').d-flex.justify-content-center
     - var i = 1;
     while i <= pagesCount
       li.page-item
-        a.page-link(href=`?pages=${i}`)= i++
+        a.page-link(href=`?page=${i}`)= i++
 >
     li.page-item
       a.page-link(href='#') Next

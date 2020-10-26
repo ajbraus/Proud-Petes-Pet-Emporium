@@ -121,10 +121,7 @@ if (document.querySelector('#new-pet')) {
                 window.location.replace(`/pets/${response.data.pet._id}`);
             })
             .catch(function (error) {
-                const alert = document.getElementById('alert')
-                alert.classList.add('alert-warning');
-                alert.textContent = 'Oops, something went wrong saving your pet. Please check your information and try again.';
-                alert.style.display = 'block';
+                console.log(error);
             });
     });
 }
@@ -183,6 +180,17 @@ const PetSchema = new Schema({
   timestamps: true
 });
 ```
+>
+> Make sure that `views/pets-new.pug` has the `birthday` form-group like so:
+>
+```pug
+form(action="#" id="new-pet")
+...
+.form-group
+    label Birthday
+    input.form-control(name="birthday")
+...
+```
 
 Now we have our validations set in the model. Will an invalid pet be saved anymore?
 
@@ -206,13 +214,14 @@ Let's add a hidden Bootstrap 4 alert module to our layout template that we we'll
 Now we can manipulate this alert via JavaScript when there is an error (or a success!);
 
 >[action]
-> Add the following `catch` code to your own `catch` block in `/public/scripts.js`:
+> Replace the `catch` code in your `catch` block in `/public/scripts.js` with the following:
 >
 ```js
 axios.post('/pets', pet)
   .then(function (response) {
     window.location.replace(`/pets/${response.data._id}`);
   })
+  // New Catch Code
   .catch(function (error) {
     const alert = document.getElementById('alert')
     alert.classList.add('alert-warning');
@@ -227,7 +236,7 @@ Now that we see the alert, can you use the [setTimeout(callback, milliseconds)](
 
 > [solution]
 >
-> Add the folllowing at the end of the `catch` block  in `/public/scripts.js`:
+> Add the following at the end of the `catch` block  in `/public/scripts.js`:
 >
 ```js
 setTimeout(() => {
@@ -271,6 +280,12 @@ Finally let's finish off our validations by adding client-side validations into 
 >
 ...
 ```
+
+The `*` is another visual way to denote a required field!
+
+> [challenge]
+>
+> Add some styles to make the `*` red!
 
 # Product So Far
 

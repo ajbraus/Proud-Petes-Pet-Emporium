@@ -86,6 +86,25 @@ Once you have finished the above, continue on to the next steps:
 npm install
 ```
 
+Next you need to make sure  MongoDB is properly installed. We will be using this for our database!
+> [action]
+>
+> Follow the [install instructions](https://zellwk.com/blog/install-mongodb/). **Pay attention to the Preparations (MacOS Catalina onwards) section!!**
+>
+> You'll then need to run the following commands to make sure `mongod` is working correctly:
+>
+```bash
+$ sudo mongod --dbpath /System/Volumes/Data/data/db
+$ alias mongod="sudo mongod --dbpath /System/Volumes/Data/data/db"
+```
+> The alias is so that you don't have to type out the long command every time you want to start `mongod`
+
+<!--  -->
+
+> [info]
+>
+> Official instructions [here](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/), but we liked the above resource better since it specifices how to handle Catalina changes.
+
 Now there is just one more step to seed your database before running your server.
 
 > [action]
@@ -93,6 +112,22 @@ Now there is just one more step to seed your database before running your server
 >
 ```bash
 $ npm install -g node-mongo-seeds
+$ seed-setup
+```
+> Next open the `seed.js` file you just created, and update it to the following:
+>
+```js
+module.exports = {
+	"undefined": "localhost/local",
+	"dev": "localhost/local",
+	"prod": "localhost/local"
+}
+```
+> This allows for the initial seed data to be found by `node-mongo-seeds`
+>
+> Finally, let's run the last few commands to seed our database with some starter  data, and then launch our localhost!
+>
+```bash
 $ seed
 $ nodemon
 ```

@@ -45,7 +45,7 @@ Now we need a `pug` form in our header `navbar`.
 So we can take the bootstrap 4 [navbar form](https://getbootstrap.com/docs/4.0/components/navbar/#forms) and plug it into a `jade/pug` => [HTML converter](http://html2jade.org/). And put this into the `nav` in the `layout.pug` file.
 
 >[action]
-> Update the `nav` in `layout.pug` to include the form:
+> Update the `nav` in `layout.pug` to include this form as the last element:
 >
 ```pug
 nav.navbar.navbar-expand-sm.navbar-light.bg-light
@@ -76,13 +76,17 @@ http://localhost:3000/search?term=test
 
 >[action]
 > Make the `/search` route in `routes/pets.js`, using the same `pets-index.pug` template.
-
+>
 ```js
 // SEARCH PET
 app.get('/search', (req, res) => {
-  res.render('pets-index', { pets: [0] });
+    Pet.find().exec((err, pets) => {
+        res.render('pets-index', { pets: pets });    
+    });
 });
 ```
+
+This should look exactly like the index page, but the url should have your search query in it! Don't worry, we're about to fix this so search works!
 
 # Simple Search Model Logic
 

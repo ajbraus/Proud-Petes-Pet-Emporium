@@ -1,4 +1,4 @@
----
+sequential---
 title: "Uploading Files to AWS S3"
 slug: "uploading-files"
 ---
@@ -47,12 +47,11 @@ Please reference the [AWS Documentation](https://docs.aws.amazon.com/index.html#
 
 # Get an AWS Console Account
 
-1. [Sign up for an AWS console account](https://aws.amazon.com/console/) by navigating to the link and clicking the **Create a Free Account** button.
-![AWS Create Account](assets/aws-create-account.png)
+1. [Sign up for an AWS console account](https://aws.amazon.com/console/) by navigating to the link and clicking the **Create a Free Account** button. Select that you are a `root` user
 1. Fill out the account information form and then press **Continue**
 1. On the *Contact Information* page, select `Personal` when asked for account type and fill out the required information.
 ![AWS Account Type](assets/aws-contact-info.png)
-1. Enter your credit card information. **Don't worry, you won't be charged as long as you don't exceed the [AWS Free Tier Limits](https://aws.amazon.com/free/) (which you shouldn't, since this is just a small, non-public web app)**
+1. Enter your credit card information. **Don't worry, you won't be charged as long as you don't exceed the [AWS Free Tier Limits](https://aws.amazon.com/free/?all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=tier%23always-free) (which you shouldn't, since this is just a small, non-public web app)**
 1. Fill out the `Confirm your identity` form
 1. After confirming your account, make sure to select the **Basic Plan**, which is the **Free** one. **If you don't choose Basic, your credit card you submitted will be charged**.
 ![AWS Support Plan](assets/aws-support-plan.png)
@@ -64,7 +63,6 @@ Please reference the [AWS Documentation](https://docs.aws.amazon.com/index.html#
 1. Once you're signed in, under the **Find Services** searchbar, search for **IAM** and select the service.
 ![AWS IAM SEARCH](assets/aws-console-iam.png)
 1. Select **Users** from the sidebar
-![AWS IAM DASH](assets/aws-iam-dashboard.png)
 1. In the top left, select **Add user**
 ![AWS IAM ADD USER](assets/aws-iam-add-user.png)
 1. Give `petepet` as the **User name**, and  under **Access Type** Select the **Programmatic access**. From there click the **Next:Permissions** button
@@ -73,7 +71,7 @@ Please reference the [AWS Documentation](https://docs.aws.amazon.com/index.html#
 ![AWS POLICIES](assets/aws-iam-policy.png)
 1. Skip the tags (we won't need it) and just select **Next: Review**
 1. Make sure everything looks correct, and then select **Create User**
-![AWS IAM SUMMARY](assets/aws-iam-policy.png)
+![AWS IAM SUMMARY](assets/aws-iam-summary.png)
 
 You should now have a user that has both an **Access Key ID** and a **Secret access key**.
 
@@ -90,10 +88,11 @@ Once you're done with this, go back to your browser and select **Close** on the 
 ## Backup Plan for Access Keys
 If for whatever reason those keys don't work, you can try making a key for your AWS root account instead. Follow these steps as a backup plan:
 
-1. From the home screen, select **Activate MFA on your root account** and then press **Manage MFA**
-![AWS CONSOLE MFA](assets/aws-console-mfa.png)
-1. On the popup, check the checkbox and then choose **Continue to Security Credentials**
-![AWS POPUP](assets/aws-popup.png)
+1. From the IAM Dashboard, select **Enable MFA** and then press **Activate MFA**
+![AWS IAM DASHBOARD](assets/aws-iam-dashboard-mfa.png)
+![AWS CONSOLE MFA](assets/aws-console-mfa-2020.png)
+1. On the popup, select the **Virtual MFA device** option, and click **Continue**
+1. Follow the steps for setting up a Virtual MFA on your device. We recommend using [Google Authenticator](https://support.google.com/accounts/answer/1066447?co=GENIE.Platform%3DAndroid&hl=en), it is supported on Android and iOS. **NOTE:** When it asks you to type in two seuqential MFA codes, type the first one you see on the app, wait for it to expire, then type in the next one. Those are your two codes!
 1. Select **Access keys (access key ID and secret access key)** and click the **Create New Access Key** button. Again noting this isn't the ideal way to do it, but it is a backup plan
 ![AWS CREATE KEY](assets/aws-mfa-create-key.png)
 1. Click on **Show Access Key** in the popup
@@ -108,15 +107,15 @@ You should now have the root **Access Key ID** and a **Secret access key**. Try 
 1. Provide a **unique bucket name**, and under **Region**, select `US West (N. California)`. From there hit **Next**
 ![AWS BUCKET NAME](assets/aws-bucket-name.png)
 1. On the **Properties** screen, don't select any of the options and just press **Next**. More info on the properties can be found [here](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)
-1. *Uncheck* all settings on the **Public access settings for this bucket** page and press **Next**
-![AWS UNCHECK](assets/aws-uncheck.png)
+1. *Uncheck* all settings on the **Public access settings for this bucket** page, and then make sure to check the box in the orange warning popup that appears. Once you've done that, press **Next**
+![AWS UNCHECK](assets/aws-uncheck-2020.png)
 1. Review your bucket, making sure the **Region** is set to `US West (N. California)`, and then select **Create bucket**
-![AWS BUCKET REVIEW](assets/aws-bucket-review.png)
-1. Select your newly created bucket and navigate to the **Permissions** tab. Click on **Bucket Policy** and paste in the following policy. Once you've done that, press **Save**:
+![AWS BUCKET REVIEW](assets/aws-bucket-review-2020.png)
+1. Select your newly created bucket and navigate to the **Permissions** tab. Click on **Bucket Policy** and paste in the following policy. Once you've done that, press **Save**. Make sure you replace `YOUR_BUCKET_NAME` with your actual bucket name:
 
 ```json
 {
-    "Version": "2012-10-17",
+    "Version": "2020-10-27",
     "Statement": [
         {
             "Sid": "PublicReadGetObject",
@@ -128,19 +127,23 @@ You should now have the root **Access Key ID** and a **Secret access key**. Try 
     ]
 }
 ```
-![AWS BUCKET POLICY](assets/aws-bucket-policy.png)
+![AWS BUCKET POLICY](assets/aws-bucket-policy-2020.png)
 
 Finally, make sure to add the **region** and **bucket** to your `.env` file.
 
 >[action]
-> Add the following to lines to your `.env` file:
+> Add the following to lines to your `.env` file, replacing `YOUR_BUCKET_NAME` with your actual bucket name:
 >
 ```
 S3_REGION=us-west-1
-S3_BUCKET=[YOUR_BUCKET_NAME]
+S3_BUCKET=YOUR_BUCKET_NAME
 ```
 
 Alright! We're all set up with AWS now!
+
+> [info]
+>
+> Note the policies we created here are _extremely_ relaxed, and are done for the purpose of easing into AWS. To create a more real-world policy, check out the stretch challenges at the end of this chapter!
 
 # Adding Middleware: s3-uploader
 
@@ -157,7 +160,7 @@ $ npm install multer s3-uploader --save
 Now let's load our modules, but not in `server.js` because we don't need it for the whole app, just in the specific route. So we'll load them right in the controller where we'll use it: `pets.js`.
 
 >[action]
-> Update `/routes/pets.js` to include the new modules:
+> At the top of `/routes/pets.js`, add the following consts to include the new modules:
 >
 ```js
 ...
@@ -217,6 +220,7 @@ First we have to add `upload.single('avatar')` to the `create` route in `/routes
 // CREATE PET
 app.post('/pets', upload.single('avatar'), (req, res, next) => {
   console.log(req.file)
+  //  rest of function remains the same
   ...
 })
 ```
@@ -313,7 +317,9 @@ const PetSchema = new Schema({
   , avatarUrl: { type: String, required: true }
   , favoriteFood: { type: String, required: true }
   , description: { type: String, minlength: 140, required: true }
-})
+}, {
+  timestamps: true
+});
 ```
 
 Almost there, let's wrap this up with our views!
@@ -325,7 +331,8 @@ Alright, our model and controller are set, now we just gotta make the images sho
 First let's change our New Pet form to actually allow for giving a file for the `avatar` instead of providing two image URLs.
 
 >[action]
-> Replace the `picUrl` and `picUrlSq` `.form-group` elements with one for `avatar`:
+>
+> Replace the `picUrl` and `picUrlSq` `.form-group` elements with one for `avatar` in both `views/pets-new.pug` and `views/pets-edit.pug`:
 >
 ```pug
 .form-group
@@ -336,6 +343,7 @@ First let's change our New Pet form to actually allow for giving a file for the 
 Next we want to make sure that the images on both our `index` and `show` views appear properly not only for `avatarUrl`, but for our original image url parameters as well (otherwise all those original pets won't have an image!)
 
 >[action]
+>
 > Update the `img` element in `/views/pets-index.pug` with the following conditional:
 >
 ```pug
@@ -363,9 +371,19 @@ else
 
 # Product So Far
 
-Try uploading a new pet using an avatar! Make sure your old pets all still display too.
+> [action]
+>
+> Try uploading a new pet using an avatar! Make sure your old pets all still display too.
 
-You should notice that an `uploads/` folder gets created. **Make sure to add `uploads` to your `.gitignore` file so you don't push up all your uploaded images to GitHub.**
+Next go check on your bucket to make sure your new pet images uploaded successfully!
+
+> [action]
+>
+> Go to [your bucket](https://console.aws.amazon.com/s3/home?region=us-west-1), click on the bucket name. There should now be a `pets` folder. Click on that and ensure that your images were uploaded successfully!
+
+> [action]
+>
+> You should notice that an `uploads/` folder gets created. **Make sure to add `uploads` to your `.gitignore` file so you don't push up all your uploaded images to GitHub.**
 
 Congrats on getting AWS S3 up and running with your code! That's no small feat. Let's commit this!
 
@@ -377,9 +395,10 @@ $ git commit -m 'Implemented S3 file uploads'
 $ git push
 ```
 
-# Stretch Challenge
+# Stretch Challenges
 
 >[challenge]
+>
 >
 > 1. You got this working for new pets, but what about if you *edit* a pet? Make sure you can edit a pet, and that the avatar is a valid field in the form.
 > 1. Right now, _anyone_ who accesses your website can make a New Pet. How can you change your AWS policies to only let you (or other users you authorize) create new pets?

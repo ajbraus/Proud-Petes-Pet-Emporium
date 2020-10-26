@@ -132,6 +132,12 @@ $ seed
 $ nodemon
 ```
 
+<!--  -->
+
+> [info]
+>
+> if you run into errors above, try replacing the `/local` to `/petes-pets` in `seed.js`. Still running into issues? Contact your instructor!
+
 Now your browser at `localhost:3000` should look like this:
 
 ![petes-pets](assets/petes-pets.png)

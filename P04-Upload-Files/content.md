@@ -1,4 +1,4 @@
-sequential---
+---
 title: "Uploading Files to AWS S3"
 slug: "uploading-files"
 ---

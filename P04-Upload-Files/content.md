@@ -115,14 +115,14 @@ You should now have the root **Access Key ID** and a **Secret access key**. Try 
 
 ```json
 {
-    "Version": "2020-10-27",
+    "Version": "2012-10-17",
     "Statement": [
         {
             "Sid": "PublicReadGetObject",
             "Effect": "Allow",
             "Principal": "*",
             "Action": "s3:GetObject",
-            "Resource": "arn:aws:s3:::[YOUR_BUCKET_NAME]/*"
+            "Resource": "arn:aws:s3:::YOUR_BUCKET_NAME/*"
         }
     ]
 }

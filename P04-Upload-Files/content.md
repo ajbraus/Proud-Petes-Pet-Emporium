@@ -227,7 +227,7 @@ app.post('/pets', upload.single('avatar'), (req, res, next) => {
 
 Once `req.file` is defined and coming in from our file input field from our form, we need to use `client` to save `req.file` to AWS and get back the URL our S3 bucket for the image.
 
-After the pet is successfully saved, then we can save the image. We're going to get back both the version URL's but we just want the URL leaving off the `-standard` and `-square` because we can then save just one URL and when we call it. We'll make sure the views can handle this in a sec.
+After the pet is successfully saved, then we can save the image. We're going to get back both versions of the URL's but we just want the URL leaving off the `-standard` and `-square` because we can then save just one URL and when we call it. We'll make sure the views can handle this in a sec.
 
 >[action]
 > Update the body of the `create` route in `/routes/pets.js` with the following:
@@ -238,9 +238,11 @@ After the pet is successfully saved, then we can save the image. We're going to 
     var pet = new Pet(req.body);
     pet.save(function (err) {
       if (req.file) {
+        // Upload the images
         client.upload(req.file.path, {}, function (err, versions, meta) {
           if (err) { return res.status(400).send({ err: err }) };
 >
+          // Pop off the -square and -standard and just use the one URL to grab the image
           versions.forEach(function (image) {
             var urlArray = image.url.split('-');
             urlArray.pop();

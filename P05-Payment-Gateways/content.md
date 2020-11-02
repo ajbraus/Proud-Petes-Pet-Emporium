@@ -281,8 +281,8 @@ Finally, let's customize the `/pets/:id/purchase` route to include the price. **
     // this way we'll insure we use a non-null value
     let petId = req.body.petId || req.params.id;
 >
-    Pet.findById(petId).exec((err, pet) => {
-      if(err) {
+    Pet.findById(petId).exec((err, pet)=> {
+      if (err) {
         console.log('Error: ' + err);
         res.redirect(`/pets/${req.params.id}`);
       }
@@ -293,12 +293,12 @@ Finally, let's customize the `/pets/:id/purchase` route to include the price. **
         source: token,
       }).then((chg) => {
         res.redirect(`/pets/${req.params.id}`);
-        });
       })
       .catch(err => {
-        console.log('Error: ' + err);
+        console.log('Error:' + err);
       });
     })
+
   });
 ```
 

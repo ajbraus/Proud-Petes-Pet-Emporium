@@ -72,16 +72,16 @@ const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
 # Make a Mailgun Account & Add Credentials
 
-1. Head over to [Mailgun](https://www.mailgun.com) and create an account by clicking the **Sign Up** button
+1. Head over to [Mailgun](https://www.mailgun.com) and create an account by clicking the **Start Sending** button
 1. Fill out the form with your information. Don't worry about the credit card number, you won't go over 10,000 emails
-1. Select **Concept Plan**, then click **Go To Dashboard**
-![MG CONCEPT PLAN](assets/mg-concept-plan.png)
+1. Select **Flex Trial**, then click **Create Account**
+![MG FLEX TRIAL](assets/mg-flex-trial.png)
 1. Check your email and verify your account, go through the verification code process
 1. From the Dashboard, you should see a **Getting Started** box. After you finish activating your account, click on **Add a custom domain**
 ![MG DASH DOMAIN](assets/mg-dash-domain.png)
-1. Enter a unique domain name and then click **Add Domain**. Now you have a domain! *Don't worry about verifying your domain for now.*
+1. Enter a unique domain name, leave other values as default and then click add domain **Add Domain**. Now you have a domain! *Don't worry about verifying your domain for now.*
 ![MG ADD DOMAIN](assets/mg-add-domain.png)
-1. Finally, go back to the dashboard and scroll down. You should see an **API Keys** section. Find the **Private API Key** and copy that.
+1. Finally, go back to the dashboard and scroll down. You should see an **API Keys** section at the right. Click on it, find the **Private API Key** and copy that.
 ![MG API KEY](assets/mg-api-key.png)
 
 Now That you have both your **Private API key** and **domain**, let's add them to the project.
@@ -195,14 +195,14 @@ Once emails are sending, see if you can display the `user` name and age with han
 
 # Send an Email When Pets are Purchased.
 
-Now we don't want to send emails just whenever we send our app! We want to send them when certain controller logic runs. For our Pet Store, there are a few places emails could go. When a pet is purchased, or when a pet is created. Let's do it as a notification when pets are purchased.
+Now we don't want to send emails just whenever we start our app! We want to send them when certain controller logic runs. For our Pet Store, there are a few places emails could go. When a pet is purchased, or when a pet is created. Let's do it as a notification when pets are purchased.
 
 Move the email code so an email is sent to your email address whenever a pet is purchased.
 
 **IMPORTANT NOTE:** For the purpose of this tutorial we're going to be using the same email we set for the user's Stripe email: `req.body.stripeEmail`. If you want to use a different email, you'll need to implement a solution different from the one below.
 
 >[action]
-> Create a new folder called `/utils`, and within it, a new file called `/utils/mailer.js`. Move the `const` declarations from `server.js` to the top of `/utils/mailer.js`:
+> Create a new folder in the root of your project called `/utils`, and within it, a new file called `/utils/mailer.js`. Move the `const` declarations from `server.js` to the top of `/utils/mailer.js`:
 >
 ```js
 // mailer.js
@@ -269,7 +269,7 @@ const mailer = require('../utils/mailer');
     console.log(req.body);
     // Set your secret key: remember to change this to your live secret key in production
     // See your keys here: https://dashboard.stripe.com/account/apikeys
-    var stripe = require("stripe")("sk_test_Loz6xPRc7Tl8c6OCkyZMAEkE");
+    var stripe = require("stripe")(process.env.PRIVATE_STRIPE_API_KEY);
 >
     // Token is created using Checkout or Elements!
     // Get the payment token ID submitted by the form:

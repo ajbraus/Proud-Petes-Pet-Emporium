@@ -37,6 +37,12 @@ First off we'll make a plan of the outside-in, step-by-step process to get email
 1. Send a sample email
 1. Setup emails to send whenever a pet is sold.
 
+**IMPORTANT NOTE:** You will need to provide a credit card. As of 11/2/2020, the Flex Trial allows you to send 5000 emails per month for 3 months for free. After that, it will charge you for any messages you send at a rate of $0.80/1,000 messages. **Please be aware of this should you send emails with Mailgun 3 months after you sign up today**
+
+> [action]
+>
+> Re-read the important note above so you're aware of the Mailgun pricing plan.
+
 # Installing and Configuring nodemailer and nodemailer-mailgun-transport
 
 Before we start integrating `nodemailer` into our app, let's do some simple tests with it in `server.js` to make sure the functionality is correct.

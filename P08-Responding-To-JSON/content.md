@@ -24,7 +24,7 @@ If you want to build an API fast, you can  detect if the `Content-Type` of the r
 
 > [action]
 >
-> Update `index.js` to the following:
+> Update `routes/index.js` to the following:
 >
 ```js
 const Pet = require('../models/pet');
@@ -73,7 +73,7 @@ To test that your server is responding with both HTML and JSON, add additional t
 
 # Another Option - New Controllers
 
-If you are building a large, funded, revenue-generating web server, then you will want to build an entire separate set of controllers for your API. In a large enough company an API will be an entirely different team!
+If you are building a large, funded, revenue-generating web server, then you will want to build an entire separate set of controllers for your API. In a large enough company an API will be an entirely built by a different team!
 
 The first step is to namespace your API routes with the preface `/api/` so all resourceful routes that go to your API controllers always are prefaced with `/api/`.
 

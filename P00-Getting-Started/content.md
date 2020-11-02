@@ -72,6 +72,8 @@ Now we need to change the remote so that you can commit/push/pull the changes yo
 $ cd petes-pets
 # can grab the url from the "Clone or download" link on your repo page
 $ git remote set-url origin git@github.com:YOUR_USERNAME/REPO-NAME
+# move the git history from master to the new branch called main
+$ git branch -M main
 $ git push -u origin main
 ```
 
@@ -172,5 +174,5 @@ Before we move on, let's make our first commit:
 ```bash
 $ git add .
 $ git commit -m 'cloned starter and added comments'
-$ git push origin main -u
+$ git push origin main
 ```

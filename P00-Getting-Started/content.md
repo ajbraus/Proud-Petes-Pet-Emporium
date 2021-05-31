@@ -105,7 +105,7 @@ $ alias mongod="sudo mongod --dbpath /System/Volumes/Data/data/db"
 
 > [info]
 >
-> Official instructions [here](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/), but we liked the above resource better since it specifices how to handle Catalina changes.
+> Official instructions [here](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/), but we liked the above resource better since it specifies how to handle Catalina changes.
 
 Now there is just one more step to seed your database before running your server.
 
@@ -138,7 +138,10 @@ $ nodemon
 
 > [info]
 >
-> if you run into errors above, try replacing the `/local` to `/petes-pets` in `seed.js`. Still running into issues? Contact your instructor!
+> if you run into errors above, try replacing the `/local` to `/petes-pets` in `seed.js`.
+> If you do this, also remember to change the connection url in your `server.js` from `'mongodb://localhost/local'` to `'mongodb://localhost/petes-pets'`.
+
+> Still running into issues? Contact your instructor!
 
 Now your browser at `localhost:3000` should look like this:
 

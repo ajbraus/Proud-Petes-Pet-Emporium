@@ -61,7 +61,7 @@ Make sure your homepage looks like this:
 
 ![search-form](assets/search-form.png)
 
-And when you submit it, the url should be formed like this:
+When you type in the value `'test'` into the search input field and you submit it, the url should be formed like this:
 
 ```
 http://localhost:3000/search?term=test

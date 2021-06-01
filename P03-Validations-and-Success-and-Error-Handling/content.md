@@ -96,7 +96,7 @@ Now let's change the form's action, add an id attribute of `new-pet`.
 > Update the `action` and `id` attributes of the `form` in `/views/pets-new.pug`:
 >
 ```pug
-//- pets-new.jade
+//- pets-new.pug
 >
 ...
 form(action="#" id="new-pet")

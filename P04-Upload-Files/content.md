@@ -8,7 +8,7 @@ slug: "uploading-files"
 1. ~~Implement validations, success, and error handling~~
 1. **Uploading files**
     1. **Get an AWS console account**
-    1. **Get our API public and secret keys and save them in our `.env` folder.**
+    1. **Get our API public and secret keys and save them in our `.env` file.**
     1. **Make a new "bucket" in AWS S3**
     1. **Change the form to use `multipart/form-data`**
     1. **Add some middleware to accept `multipart/form-data`: `multer`**
@@ -30,7 +30,7 @@ We'll be using **Amazon Web Services Simple Storage Service (AWS S3)** to save o
 In order to accomplish this pattern we have to take the following steps:
 
 1. Get an AWS console account
-1. Get our API public and secret keys and save them in our `.env` folder.
+1. Get our API public and secret keys and save them in our `.env` file.
 1. Make a new "bucket" in AWS S3
 1. Change the form to use `multipart/form-data`
 1. Add some middleware to accept `multipart/form-data`: `multer`
@@ -102,16 +102,15 @@ You should now have the root **Access Key ID** and a **Secret access key**. Try 
 
 # Make a new "bucket" in AWS S3
 
-1. Start by navigating [back to your console](https://console.aws.amazon.com/s3/), and choose **Create bucket**
+1. Start by navigating [back to your console](https://console.aws.amazon.com/s3/), search for **S3 buckets** in the searchbar and choose the service. Click on **Create bucket**.
 ![AWS CREATE BUCKET](assets/aws-create-bucket.png)
-1. Provide a **unique bucket name**, and under **Region**, select `US West (N. California)`. From there hit **Next**
+1. Provide a **unique bucket name**, and under **Region**, select `US West (N. California)`. From there, scroll down to the next section.
 ![AWS BUCKET NAME](assets/aws-bucket-name.png)
-1. On the **Properties** screen, don't select any of the options and just press **Next**. More info on the properties can be found [here](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)
-1. *Uncheck* all settings on the **Public access settings for this bucket** page, and then make sure to check the box in the orange warning popup that appears. Once you've done that, press **Next**
-![AWS UNCHECK](assets/aws-uncheck-2020.png)
-1. Review your bucket, making sure the **Region** is set to `US West (N. California)`, and then select **Create bucket**
-![AWS BUCKET REVIEW](assets/aws-bucket-review-2020.png)
-1. Select your newly created bucket and navigate to the **Permissions** tab. Click on **Bucket Policy** and paste in the following policy. Once you've done that, press **Save**. Make sure you replace `YOUR_BUCKET_NAME` with your actual bucket name:
+1. *Uncheck* all settings on the **Public access settings for this bucket** section, and then make sure to check the box in the warning popup that appears. Leave all other sections - **Bucket Versioning, Tags, Default encryption** - as their default options.
+![AWS UNCHECK](assets/aws-uncheck-2021.png)
+1. Review your bucket configuration, making sure the **Region** is set to `US West (N. California)`, and then select **Create bucket**
+![AWS BUCKET REVIEW](assets/aws-bucket-review-2021.png)
+1. Select your newly created bucket and navigate to the **Permissions** tab. Scroll down to **Bucket policy** section, click on **Edit** and paste in the following policy. Once you've done that, scroll down and **Save changes**. Make sure you replace `YOUR_BUCKET_NAME` with your actual bucket name:
 
 ```json
 {
@@ -127,7 +126,7 @@ You should now have the root **Access Key ID** and a **Secret access key**. Try 
     ]
 }
 ```
-![AWS BUCKET POLICY](assets/aws-bucket-policy-2020.png)
+![AWS BUCKET POLICY](assets/aws-bucket-policy-2021.png)
 
 Finally, make sure to add the **region** and **bucket** to your `.env` file.
 
@@ -264,7 +263,7 @@ This won't work yet, as we have to update the model and the views, but before we
 
 # Update the Scripts
 
- We need to update `public/javascripts/scripts.js` to handle files by utilizing [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) to properly send the file with our text, as well as adjusting the headers in `axio`.
+ We need to update `public/javascripts/scripts.js` to handle files by utilizing [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) to properly send the file with our text, as well as adjusting the headers in `axios`.
 
 >[action]
 > Open `public/javascripts/scripts.js` and change the script in there to the following:
@@ -336,10 +335,19 @@ First let's change our New Pet form to actually allow for giving a file for the 
 >
 > Replace the `picUrl` and `picUrlSq` `.form-group` elements with one for `avatar` in both `views/pets-new.pug` and `views/pets-edit.pug`:
 >
+> In `views/pets-new.pug`
+>
 ```pug
 .form-group
   label Avatar*
   input.form-control(name="avatar" type="file" required)
+```
+> In `views/pets-edit.pug`:
+>
+```pug
+.form-group
+    label Avatar
+    input.form-control(name="avatar" type="file" value=pet.picUrl)
 ```
 
 Next we want to make sure that the images on both our `index` and `show` views appear properly not only for `avatarUrl`, but for our original image url parameters as well (otherwise all those original pets won't have an image!)

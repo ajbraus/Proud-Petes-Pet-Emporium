@@ -2,6 +2,7 @@
 
 In this tutorial you will add a slew of common patterns to an existing website.
 
+[!Parot](cover.jpg)
 
 # Chapters
 

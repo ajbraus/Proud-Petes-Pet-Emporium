@@ -1,8 +1,3 @@
----
-title: "Getting Started: Reading Code"
-slug: getting-started
----
-
 This tutorial will walk you through adding the some common advanced features to an Express.js server, such as pagination, adding payment gateways, and uploading files using S3.
 
 # Why Is This Important?
@@ -56,8 +51,7 @@ Lastly, the commit prompts in this tutorial should be the **minimum** amount of 
 
 You won't always be starting with a **Green Field Project** - a project where you start from scratch - sometimes you'll work on a project that has already started. In this tutorial we'll simulate that by starting with a relatively simple starter project.
 
-> [action]
-> Go to the [starter repo](https://github.com/Product-College-Labs/petes-pets) and clone the repo locally
+> Go to the [starter repo](https://github.com/Make-School-Labs/petes-pets) and clone the repo locally
 >
 ```bash
 $ git clone git@github.com:Make-School-Labs/petes-pets.git
@@ -65,7 +59,6 @@ $ git clone git@github.com:Make-School-Labs/petes-pets.git
 
 Now we need to change the remote so that you can commit/push/pull the changes you make to your own repo. **It is very important you do the below steps in order to get everything working properly.**
 
-> [action]
 > Go to GitHub and create an _empty_, public repository called REPO-NAME, and now associate it as a remote for your cloned starter code, and then push to it.
 >
 ```bash
@@ -81,7 +74,6 @@ Go to your repo on GitHub and make sure your previously empty repo is now full w
 
 Once you have finished the above, continue on to the next steps:
 
-> [action]
 > Install your dependencies
 >
 ```bash
@@ -89,8 +81,7 @@ npm install
 ```
 
 Next you need to make sure  MongoDB is properly installed. We will be using this for our database!
-> [action]
->
+
 > Follow the [install instructions](https://zellwk.com/blog/install-mongodb/). **Pay attention to the Preparations (MacOS Catalina onwards) section!!**
 >
 > You'll then need to run the following commands to make sure `mongod` is working correctly:
@@ -103,13 +94,10 @@ $ alias mongod="sudo mongod --dbpath /System/Volumes/Data/data/db"
 
 <!--  -->
 
-> [info]
->
-> Official instructions [here](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/), but we liked the above resource better since it specifies how to handle Catalina changes.
+Official instructions [here](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/), but we liked the above resource better since it specifies how to handle Catalina changes.
 
 Now there is just one more step to seed your database before running your server.
 
-> [action]
 > Install `node-mongo-seeds`
 >
 ```bash
@@ -136,8 +124,6 @@ $ nodemon
 
 <!--  -->
 
-> [info]
->
 > if you run into errors above, try replacing the `/local` to `/petes-pets` in `seed.js`.
 > If you do this, also remember to change the connection url in your `server.js` from `'mongodb://localhost/local'` to `'mongodb://localhost/petes-pets'`.
 
@@ -166,14 +152,12 @@ Here are some characteristics of this project:
 
 What other characteristics can you find?
 
-> [action]
+
 > Before moving on complete the following:
 > Are there any middleware that you do not recognize in `server.js`? Google them and comment your code with what they do.
 
 Before we move on, let's make our first commit:
 
->[action]
->
 ```bash
 $ git add .
 $ git commit -m 'cloned starter and added comments'

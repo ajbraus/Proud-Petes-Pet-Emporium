@@ -1,7 +1,3 @@
----
-title: "Pagination"
-slug: "pagination"
----
 
 1. ~~Implement simple search on the store~~
 1. **Build out pagination**
@@ -34,7 +30,6 @@ Let's code from the **Outside-In**, so we'll start with the views, then do the c
 
 # Pagination Navigation Snippet
 
->[action]
 > Let's add this `nav` snippet to the bottom of the `pets-index.pug` template.
 >
 ```pug
@@ -63,7 +58,6 @@ Mongoose does not ship with pagination supported, but we can add it using the `m
 
 **NOTE:** This plugin will only work with Node.js >= 4.2 and Mongoose >= 4.2, so make sure both are updated accordingly.
 
->[action]
 > Add the `mongoose-paginate` module
 >
 ```bash
@@ -96,7 +90,6 @@ module.exports = mongoose.model('Pet', PetSchema);
 
 To do a smoke test of this working let's use the new `.paginate()` function on our model in the `/` route query.
 
->[action]
 > Update `/routes/index/get` in `index.js` to be the following:
 >
 ```js
@@ -158,7 +151,6 @@ http://localhost:3000/?page=2
 http://localhost:3000/?page=3
 ```
 
->[action]
 > Update `/routes/index/get` in `index.js` to be the following:
 >
 ```js
@@ -174,8 +166,7 @@ app.get('/', (req, res) => {
 
 Notice that we're using the `||` or `or` operator to make sure there is always a value for `page`. In JavaScript and some other languages, the `||` operator will evaluate to it's "truthy" value, meaning if `req.query.page` is `null` or `undefined`, `page` will be equal to `1`.
 
-> [action]
->
+
 > Test out if the following `localhost` urls are working by typing them directly into your browser:
 >
 ```
@@ -200,7 +191,6 @@ result.pages // the total number of pages
 
 Let's use this in the template to make our pagination snippet dynamically respond to however many records we have. We're going to use `results.pages` and rename it `pagesCount` because that is a more accurate naming convention because now we know it is an integer.
 
-> [action]
 > Update the `res.render` line from `/routes/index/get` in `index.js` to include `pagesCount`:
 >
 ```js
@@ -209,7 +199,6 @@ res.render('pets-index', { pets: results.docs, pagesCount: results.pages });
 
 Now we need to use pug's built in `while` iterator to loop over the `pagesCount` variable to make a number for each of our pages.
 
-> [action]
 > Update your `nav` component in `/views/pets-index.pug` to the following:
 >
 ```pug
@@ -231,7 +220,6 @@ nav(aria-label='Page navigation example').d-flex.justify-content-center
 
 Finally we need to make the Next and Previous buttons work. For that we will add `currentPage` to the template. We'll use the `currentPage` to do some math to derive the previous and the next button, and to hide them if they are not necessary, like on the first and last pages.
 
-> [action]
 > Update the `res.render` line from `/routes/index/get` in `index.js` to include `currentPage`:
 >
 ```js
@@ -241,7 +229,6 @@ res.render('pets-index', { pets: results.docs, pagesCount: results.pages, curren
 
 Now we can use `currentPage` to move forward and backwards from this page. One snafu is that `currentPage` becomes a string when it is rendered here, so we have to use the `parseInt()` function in JavaScript to parse the string back into an integer to do math with it.
 
-> [action]
 > Update your `nav` component in `/views/pets-index.pug` to the following:
 >
 ```pug
@@ -278,7 +265,6 @@ Now let's make sure that the `/search` results are also paginated!
 ## Update the Route
 First thing is to remember that the first parameter to the `paginate` function is a query. Right now it's empty, but what we can do instead is to take our existing `$or` query and put it as that query parameter for `paginate`!
 
-> [action]
 > Update the `/search` route in `/routes/pets.js` to the following:
 >
 ```js
@@ -305,7 +291,6 @@ See what we did there? Instead of calling `Pet.find()`, we just took the query f
 
 This doesn't quite work though. The first page will look fine, but if you navigate to a different page, how do we remember what the term was? Let's pass it within `res.render` along with everything else.
 
->[action]
 > Update your `res.render` call in the `/search` route in `/routes/pets.js` to include the search term:
 >
 ```js
@@ -320,7 +305,6 @@ Run a search on the website. Notice the url and how it captures the search term 
 
 Pug let's us solve this with a simple conditional!
 
->[action]
 > Update your `ul.pagination` element in `/views/pets-index.pug` to the following. Make sure your indentation is correct!
 >
 ```pug

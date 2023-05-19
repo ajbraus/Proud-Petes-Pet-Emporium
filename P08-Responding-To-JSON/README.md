@@ -1,7 +1,3 @@
----
-title: "Review - Responding to JSON"
-slug: "review-responding-to-json"
----
 
 1. ~~Implement simple search on the store~~
 1. ~~Build out pagination~~
@@ -22,8 +18,6 @@ As a closing to this tutorial, let's do a quick review of how to set this up. It
 
 If you want to build an API fast, you can  detect if the `Content-Type` of the request is `application/json` and then return JSON, otherwise return the HTML template. Let's try this with our landing page:
 
-> [action]
->
 > Update `routes/index.js` to the following:
 >
 ```js
@@ -53,8 +47,6 @@ In addition to this change, you'll have to tell your mobile developer, or your f
 
 To test that your server is responding with both HTML and JSON, add additional tests for the JSON responses.
 
-> [action]
->
 > Add the following test to `/tests/test-pets.js` check for valid JSON responses:
 >
 ```js

@@ -1,7 +1,3 @@
----
-title: "Validation, Success, and Error Handling"
-slug: "validation-success-and-error-handling"
----
 
 1. ~~Implement simple search on the store~~
 1. ~~Build out pagination~~
@@ -77,7 +73,6 @@ In order to accomplish this user flow, we have to implement client-side validati
 
 # Submit Form via AJAX with Axios
 
->[action]
 > Add a link to `Axios` and to your `scripts.js` file in the `/views/layout.pug` template at the bottom with the other scripts:
 >
 ```pug
@@ -92,7 +87,6 @@ Add an `alert('hello');` into `/public/javascripts/scripts.js`. Refresh the page
 
 Now let's change the form's action, add an id attribute of `new-pet`.
 
->[action]
 > Update the `action` and `id` attributes of the `form` in `/views/pets-new.pug`:
 >
 ```pug
@@ -129,7 +123,6 @@ if (document.querySelector('#new-pet')) {
 
 Finally, we update our server `/pets/create/` route to be ready to handle a `JSON` request:
 
->[action]
 > Replace the current `create` route in `/routes/pets.js` with the following:
 >
 ```js
@@ -155,7 +148,6 @@ Check if this allows you to save new pets. We haven't added any validations yet
 
 Let's add a simple validation in our `pet` model using mongoose's built in validation options.
 
-> [info]
 > Take about 10 minutes to read Mongoose's [documentation](http://mongoosejs.com/docs/validation.html) on validations
 
 As a reminder, these are the validations we want to have in our model:
@@ -164,7 +156,6 @@ As a reminder, these are the validations we want to have in our model:
 * `description` should be longer than 140 characters
 * `picUrl` and `picUrlSq` should both be URLs
 
->[action]
 > Open up `/models/pet.js` and update the `schema` to the following:
 >
 ```js
@@ -200,7 +191,6 @@ It sure can! Let's fix this to display a generic "Oops, something went wrong" al
 
 Let's add a hidden Bootstrap 4 alert module to our layout template that we we'll use JavaScript to manipulate in the case of an error.
 
-> [action]
 > Add the `alert` to the `container` module in `/views/layout.pug`:
 >
 ```pug
@@ -213,7 +203,6 @@ Let's add a hidden Bootstrap 4 alert module to our layout template that we we'll
 
 Now we can manipulate this alert via JavaScript when there is an error (or a success!);
 
->[action]
 > Replace the `catch` code in your `catch` block in `/public/scripts.js` with the following:
 >
 ```js
@@ -234,8 +223,6 @@ Submit invalid data and see the alert appear.
 
 Now that we see the alert, can you use the [setTimeout(callback, milliseconds)](https://www.w3schools.com/js/js_timing.asp) method make it disappear after 3 seconds? Remember to remove the styling of the alert so it is ready to be used again next time.
 
-> [solution]
->
 > Add the following at the end of the `catch` block  in `/public/scripts.js`:
 >
 ```js
@@ -249,7 +236,6 @@ setTimeout(() => {
 
 Finally let's finish off our validations by adding client-side validations into our HTML form. This will prevent people from  even submitting a form that has invalid data.
 
-> [action]
 > Update all of the `.form-group` elements in `/views/pets-new.pug` to  the following:
 >
 ```pug
@@ -283,8 +269,6 @@ Finally let's finish off our validations by adding client-side validations into 
 
 The `*` is another visual way to denote a required field!
 
-> [challenge]
->
 > Add some styles to make the `*` red!
 
 # Product So Far

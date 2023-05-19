@@ -1,7 +1,3 @@
----
-title: "Simple Search"
-slug: "simple-search"
----
 
 1. **Implement simple search on the store**
     1. **Make a search form - one input field and button that submits a url structured like this `/search?term=poodle`**
@@ -22,7 +18,6 @@ So now what if we wanted to search for a certain species of dog? or for the name
 
 Here we will be adding **Simple Search** meaning that we will be contacting the server with a request with a search term, the server will make a request using **Regular Expressions** on one parameter. We will see there is a way to extend simple search to work for multiple parameters.
 
->[info]
 > Remember, we use *Regular Expressions* to match strings against a pattern (the regular expression) that we define. This is helpful for searching because then we can return only strings matching a specific pattern
 
 Chapter 7 will cover **Full Text Search**. Full text search allows you to search for multiple words across the whole text of a parameter (even a block of text) and any parameters with various search weights attached to each. MongoDB and other document-based databases ship with the ability to add full text search natively. SQL databases need a secondary service such as [Sphinx](http://sphinxsearch.com/) or [Apache Lucene](https://lucene.apache.org/) to achieve full text search.
@@ -44,7 +39,6 @@ Now we need a `pug` form in our header `navbar`.
 
 So we can take the bootstrap 4 [navbar form](https://getbootstrap.com/docs/4.0/components/navbar/#forms) and plug it into a `jade/pug` => [HTML converter](http://html2jade.org/). And put this into the `nav` in the `layout.pug` file.
 
->[action]
 > Update the `nav` in `layout.pug` to include this form as the last element:
 >
 ```pug
@@ -74,7 +68,6 @@ http://localhost:3000/search?term=test
 3. Make the `/search` route actually search using our `Pet` model.
 4. Write a test (if we were doing TDD (Test Driven Development) we'd start with this!)
 
->[action]
 > Make the `/search` route in `routes/pets.js`, using the same `pets-index.pug` template.
 >
 ```js
@@ -99,7 +92,6 @@ Great, so now when we search, we have a results page, but now let's properly pop
 
 **Simple Search**, remember, means doing a **Fuzzy Keyword Lookup** on one parameter using **Regular Expressions**. So we are going to search *just on name*. To make it search, we're going to use the `i` modifier on a new Regular Expression to do **case-insensitive matching**.
 
->[action]
 > Update `/routes/pets/search` to the following:
 >
 ```js
@@ -119,7 +111,6 @@ Open your browser and try searching for a dog's name.
 
 What if we want to expand our search beyond just the name of the pet? Maybe you'd like to see every Poodle? Let's look at using the mongo `$or` condition to extend **simple search** to be able to search for *breed or name*.
 
-> [action]
 > Update `/routes/pets/search` to the following:
 >
 ```js

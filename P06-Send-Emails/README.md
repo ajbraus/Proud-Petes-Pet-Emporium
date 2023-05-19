@@ -1,7 +1,3 @@
----
-title: "Send Emails"
-slug: "send-emails"
----
 
 1. ~~Implement simple search on the store~~
 1. ~~Build out pagination~~
@@ -39,15 +35,12 @@ First off we'll make a plan of the outside-in, step-by-step process to get email
 
 **IMPORTANT NOTE:** You will need to provide a credit card. As of 11/2/2020, the Flex Trial allows you to send 5000 emails per month for 3 months for free. After that, it will charge you for any messages you send at a rate of $0.80/1,000 messages. **Please be aware of this should you send emails with Mailgun 3 months after you sign up today**
 
-> [action]
->
 > Re-read the important note above so you're aware of the Mailgun pricing plan.
 
 # Installing and Configuring nodemailer and nodemailer-mailgun-transport
 
 Before we start integrating `nodemailer` into our app, let's do some simple tests with it in `server.js` to make sure the functionality is correct.
 
->[action]
 > Install the `nodemailer` and `nodemailer-mailgun-transport` modules
 >
 ```bash
@@ -92,7 +85,6 @@ const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
 Now That you have both your **Private API key** and **domain**, let's add them to the project.
 
->[action]
 > Add your Private API key and the  domain to your `.env` file. Replace the values with your actual MailGun API Key and Domain:
 >
 ```
@@ -117,7 +109,6 @@ Now we are ready to try to send our first email.
 
 Here's the code for sending an email with nodemailer transport:
 
-> [action]
 > Place this after your `nodemailerMailgun` declaration in `server.js`, remember to replace the `email` in `user` with your email so you can check it:
 >
 ```js
@@ -146,7 +137,6 @@ nodemailerMailgun.sendMail({
 
 If you try and run that, it will probably throw an error because there is no `email.handlebars` template. Let's make that:
 
->[action]
 > First install `handlebars`:
 >
 ```bash
@@ -172,15 +162,12 @@ $ npm install handlebars express-handlebars --save
 
 <!-- -->
 
-> [info]
 > Reminder: since `email.handlebars` will not inherit from a layout template, you will need the full html boilerplate.
 
 Run your code by starting `nodemon` up and see if it sent a "hello world" email to yourself.
 
 Once emails are sending, see if you can display the `user` name and age with handlebars variables.
 
->[solution]
->
 > Updates to `email.handlebars`:
 >
 ```html
@@ -207,7 +194,6 @@ Move the email code so an email is sent to your email address whenever a pet is 
 
 **IMPORTANT NOTE:** For the purpose of this tutorial we're going to be using the same email we set for the user's Stripe email: `req.body.stripeEmail`. If you want to use a different email, you'll need to implement a solution different from the one below.
 
->[action]
 > Create a new folder in the root of your project called `/utils`, and within it, a new file called `/utils/mailer.js`. Move the `const` declarations from `server.js` to the top of `/utils/mailer.js`:
 >
 ```js
@@ -258,8 +244,6 @@ module.exports.sendMail = (user, req, res) => {
 
 Finally, we need to use this code in our `/purchase` route, so let's do that integration.
 
-> [action]
->
 > Update `/routes/pets.js` to include the `mailer` util and use it to send an email the purchase route
 >
 ```js
@@ -347,6 +331,4 @@ $ git push
 
 # Stretch Challenge
 
-> [challenge]
->
-> Update the purchase code in the `/purchase` route to be modular like `mailer`
+1. Update the purchase code in the `/purchase` route to be modular like `mailer`

@@ -1,7 +1,3 @@
----
-title: "Uploading Files to AWS S3"
-slug: "uploading-files"
----
 
 1. ~~Implement simple search on the store~~
 1. ~~Build out pagination~~
@@ -75,7 +71,6 @@ Please reference the [AWS Documentation](https://docs.aws.amazon.com/index.html#
 
 You should now have a user that has both an **Access Key ID** and a **Secret access key**.
 
->[action]
 > In your project folder, create a `.env` file. Then copy the **Access Key ID** and **Secret access key** values into the file in this format, replacing `ACCESSKEYID` and `SecRETAcCeSskEY` with your user's values:
 >
 ```
@@ -130,7 +125,6 @@ You should now have the root **Access Key ID** and a **Secret access key**. Try 
 
 Finally, make sure to add the **region** and **bucket** to your `.env` file.
 
->[action]
 > Add the following to lines to your `.env` file, replacing `YOUR_BUCKET_NAME` with your actual bucket name:
 >
 ```
@@ -140,7 +134,6 @@ S3_BUCKET=YOUR_BUCKET_NAME
 
 Alright! We're all set up with AWS now!
 
-> [info]
 >
 > Note the policies we created here are _extremely_ relaxed, and are done for the purpose of easing into AWS. To create a more real-world policy, check out the stretch challenges at the end of this chapter!
 
@@ -148,7 +141,6 @@ Alright! We're all set up with AWS now!
 
 Now that we are submitting multipart/form-data we need to parse it using `multer` and then interact with the AWS api using `s3-uploader`. [s3-uploader docs](https://www.npmjs.com/package/s3-uploader). This is also going to require the use of [Imagemagick](https://www.imagemagick.org/) in order to manipulate images.
 
->[action]
 > Let's install the middleware:
 >
 ```bash
@@ -158,7 +150,6 @@ $ npm install multer s3-uploader --save
 
 Now let's load our modules, but not in `server.js` because we don't need it for the whole app, just in the specific route. So we'll load them right in the controller where we'll use it: `pets.js`.
 
->[action]
 > At the top of `/routes/pets.js`, add the following consts to include the new modules:
 >
 ```js
@@ -177,7 +168,6 @@ We want the configuration settings to:
 1. Clean up - when the upload is complete, we want to delete the originals and caches.
 1. We want two versions: one a rectangle and one a square, neither wider than 300-400px.
 
-> [action]
 > Add `client` right underneath the modules you just added in `/routes/pets.js`:
 >
 ```js
@@ -211,10 +201,8 @@ Alright, middleware added! Now let's do something with it
 
 We're already in it, so let's finish updating the controller. We have to make some changes to our `POST` route to use `multer` and this `client` object we've just initialized and configured.
 
->[action]
->
 First we have to add `upload.single('avatar')` to the `create` route in `/routes/pets.js`:
->
+
 ```js
 // CREATE PET
 app.post('/pets', upload.single('avatar'), (req, res, next) => {
@@ -228,7 +216,6 @@ Once `req.file` is defined and coming in from our file input field from our form
 
 After the pet is successfully saved, then we can save the image. We're going to get back both versions of the URL's but we just want the URL leaving off the `-standard` and `-square` because we can then save just one URL and when we call it. We'll make sure the views can handle this in a sec.
 
->[action]
 > Update the body of the `create` route in `/routes/pets.js` with the following:
 >
 ```js
@@ -265,7 +252,6 @@ This won't work yet, as we have to update the model and the views, but before we
 
  We need to update `public/javascripts/scripts.js` to handle files by utilizing [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) to properly send the file with our text, as well as adjusting the headers in `axios`.
 
->[action]
 > Open `public/javascripts/scripts.js` and change the script in there to the following:
 >
 ```js
@@ -305,7 +291,6 @@ Alright! Let's move on to the model.
 
 Back in our controller, we were calling `pet.avatarUrl`, but we never made that a part of our model! We also can't get rid of our previous URL parameters, as we want our old code to still work. Let's fix that:
 
->[action]
 > Update the schema in `/models/pet.js` to include `avatarUrl`, and drop the `required` from `picUrl` and `picUrlSq`
 >
 ```js
@@ -331,8 +316,6 @@ Alright, our model and controller are set, now we just gotta make the images sho
 
 First let's change our New Pet form to actually allow for giving a file for the `avatar` instead of providing two image URLs.
 
->[action]
->
 > Replace the `picUrl` and `picUrlSq` `.form-group` elements with one for `avatar` in both `views/pets-new.pug` and `views/pets-edit.pug`:
 >
 > In `views/pets-new.pug`
@@ -352,8 +335,6 @@ First let's change our New Pet form to actually allow for giving a file for the 
 
 Next we want to make sure that the images on both our `index` and `show` views appear properly not only for `avatarUrl`, but for our original image url parameters as well (otherwise all those original pets won't have an image!)
 
->[action]
->
 > Update the `img` element in `/views/pets-index.pug` with the following conditional:
 >
 ```pug
@@ -381,18 +362,12 @@ else
 
 # Product So Far
 
-> [action]
->
 > Try uploading a new pet using an avatar! Make sure your old pets all still display too.
 
 Next go check on your bucket to make sure your new pet images uploaded successfully!
 
-> [action]
->
 > Go to [your bucket](https://console.aws.amazon.com/s3/home?region=us-west-1), click on the bucket name. There should now be a `pets` folder. Click on that and ensure that your images were uploaded successfully!
 
-> [action]
->
 > You should notice that an `uploads/` folder gets created. **Make sure to add `uploads` to your `.gitignore` file so you don't push up all your uploaded images to GitHub.**
 
 Congrats on getting AWS S3 up and running with your code! That's no small feat. Let's commit this!
@@ -407,9 +382,6 @@ $ git push
 
 # Stretch Challenges
 
->[challenge]
->
->
-> 1. You got this working for new pets, but what about if you *edit* a pet? Make sure you can edit a pet, and that the avatar is a valid field in the form.
-> 1. Right now, _anyone_ who accesses your website can make a New Pet. How can you change your AWS policies to only let you (or other users you authorize) create new pets?
-> 1. Following from the previous challenge, make the website user friendly so that unauthorized users who click on the New Pet button will not be allowed to navigate to the page, and will receive a notification stating why.
+1. You got this working for new pets, but what about if you *edit* a pet? Make sure you can edit a pet, and that the avatar is a valid field in the form.
+1. Right now, _anyone_ who accesses your website can make a New Pet. How can you change your AWS policies to only let you (or other users you authorize) create new pets?
+1. Following from the previous challenge, make the website user friendly so that unauthorized users who click on the New Pet button will not be allowed to navigate to the page, and will receive a notification stating why.

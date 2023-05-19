@@ -1,7 +1,3 @@
----
-title: "Full Text Search"
-slug: "full-text-search"
----
 
 1. ~~Implement simple search on the store~~
 1. ~~Build out pagination~~
@@ -23,7 +19,6 @@ Let's start with an unweighted full text search index. **Unweighted** means that
 ## Remove Existing Indexes
 Before we add an index to our model, let's make sure we're clear of indexes (since we did fork this repo):
 
->[action]
 > Make sure `nodemon` isn't running, and then clear the pre-existing index from your db. Run each of the comments sequentially:
 >
 ```bash
@@ -38,7 +33,6 @@ If you run into a Mongo error where it says the index "already exists with diffe
 
 Now you can add your own index to your `pet` model!
 
->[action]
 > Pick one of the following models to add to `/models/pet.js`, or edit them to suit what you want:
 >
 ```js
@@ -55,7 +49,6 @@ PetSchema.index({ name: 'text', species: 'text', favoriteFood: 'text', descripti
 
 Now to call the search, use the `$text` option. The `$meta: 'textScore'` tells Mongoose to use the weights.
 
->[action]
 > Replace your `/search` route in `/routes/pets.js` with the following:
 >
 ```js

@@ -1,8 +1,3 @@
----
-title: "Payment Gateways: Stripe"
-slug: "payment-gateways"
----
-
 1. ~~Implement simple search on the store~~
 1. ~~Build out pagination~~
 1. ~~Implement validations, success, and error handling~~
@@ -62,7 +57,6 @@ Check out [Stripe's Card Payment Quickstart Docs](https://stripe.com/docs/quicks
 
 The Checkout code will take the user's credit/debit card information. It won't actually complete the payment though. It will just send that information to Stripe and get a token back.  To complete the payment, we'll have to send the token the Checkout code generates to our  server to actually complete the payment. Making a payment is called a `charge` in Stripe's **DSL (Domain Specific Language)**.
 
-> [action]
 > Put this `form` in the `.col-sm-8` element in `/views/pets-show.pug`:
 >
 ```pug
@@ -92,7 +86,6 @@ What should replace `/your-server-side-code`? What should we name that route? Th
 
 Let's use `POST` verb, but we're creating something associated with a Pet. So probably our best bet is `/pets/:id/purchase`.
 
->[action]
 > Update the `action` on the purchase form in `/views/pet-show.pug` to the following:
 >
 ```pug
@@ -109,7 +102,6 @@ app.post('/pets/:id/purchase', (req,res) => {
 
 Now add your public API key. You can do this by setting it in your `.env` file under `PUBLIC_STRIPE_API_KEY`, and then use `app.locals` to pass it forward into your template.
 
->[action]
 > Add your public stripe api key to `.env`, replacing `public-api-key` with your actual **publishable key** from your Stripe dashboard:
 >
 ```
@@ -131,7 +123,6 @@ data-key=PUBLIC_STRIPE_API_KEY
 
 Is the amount ok? Let's just leave `999` in the `data-amount` in there for now. Notice that it is in cents?
 
-> [action]
 Change the `data-name` in the purchase form in `/views/pets-show.pug` to Proud Pete's Pet Emporium:
 >
 ```pug
@@ -155,7 +146,6 @@ With these two pieces of info we can verify a charge in the Stripe system and ge
 
 So we already have the Checkout token being sent to the `/pets/:id/purchase` route (check your console log to see for yourself). But we need to add the Private Stripe API key.
 
->[action]
 > Add your Private API Key in your `.env` file, replacing the value with your actual Private API Key:
 >
 ```
@@ -164,7 +154,6 @@ PRIVATE_STRIPE_API_KEY=sk_test_4eC39HqLyjWDarjtT1zdp7dc
 
 So now we need to initiate a charge using the Stripe API. To do this we'll use the [stripe](https://www.npmjs.com/package/stripe) API wrapper called `stripe` (maintained by Stripe).
 
->[action]
 > Update your `/pets/:id/purchase` route in `/routes/pets.js` to the following. Be sure to customize the Stripe Secret API Key to **your** key value:
 >
 ```js
@@ -200,7 +189,6 @@ Now check your [stripe payments](https://dashboard.stripe.com/test/payments) to 
 
 It is clear now that the Pet model needs another attribute: a price. Add this as an integer called `price`.
 
->[action]
 > Update `seed.js` so that each pet has an integer price. Then re-run `seed` in the terminal. Here's an example price:
 >
 ```js
@@ -209,7 +197,6 @@ It is clear now that the Pet model needs another attribute: a price. Add this as
 
 Now we should update our model to include the price for all pets going forward
 
-> [action]
 > Update `/models/pet.js` to include a `price` in the schema:
 >
 ```js
@@ -231,7 +218,6 @@ const PetSchema = new Schema({
 
 Now let's update our views to include `price`:
 
->[action]
 > Update the `form` on both `/views/pets-new.pug` and `/views/pets-edit.pug` to include a new `.form-group` object for  `price`:
 >
 ```js
@@ -244,7 +230,6 @@ Now let's update our views to include `price`:
 
 Next we'll update our `show` view to include the pet's price in the Stripe modal, as well as putting in a hidden `input` to pass the pet's `id` to the controller, which we'll use in a bit:
 
-> [action]
 > Update `/views/pets-show.pug` to use the pet's price and send the pet's `id` to the controller
 >
 ```js
@@ -262,7 +247,6 @@ form(action=`/pets/${pet._id}/purchase`, method='POST')
 
 Finally, let's customize the `/pets/:id/purchase` route to include the price. **Reminder** - multiply the price by 100 to get the price in cents. Let's also make the payment description the Pet's `name` and `species`.
 
->[action]
 > Update the `/pets/:id/purchase` route in `/routes/pets.js` to the following:
 >
 ```js
@@ -318,8 +302,6 @@ $ git push
 
 If you're itching for more, check out the below challenge:
 
->[challenge]
->
 > 1) Now that the pet is saved, we better mark that the pet was saved by setting the current date and time on a new pet attribute: `purchasedAt`.
 >
 > 2) Once you finished challenge 1, mark all pets that are purchased as "Purchased!" in green text (using boostrap's `text-success` class).

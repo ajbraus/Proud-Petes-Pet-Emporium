@@ -53,7 +53,7 @@ Keep this tab handy, as we'll need these keys later in this chapter.
 
 To simplify this implementation, we are going to use Stripe's "Checkout" product that creates a high quality checkout experience with very little code.
 
-Check out [Stripe's Card Payment Quickstart Docs](https://stripe.com/docs/quickstart) to get an idea of what we'll be getting into.
+Check out [Stripe's Card Payment Quickstart Docs](https://docs.stripe.com/payments/quickstart) to get an idea of what we'll be getting into.
 
 The Checkout code will take the user's credit/debit card information. It won't actually complete the payment though. It will just send that information to Stripe and get a token back.  To complete the payment, we'll have to send the token the Checkout code generates to our  server to actually complete the payment. Making a payment is called a `charge` in Stripe's **DSL (Domain Specific Language)**.
 

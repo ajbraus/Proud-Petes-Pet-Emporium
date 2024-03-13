@@ -53,28 +53,9 @@ Keep this tab handy, as we'll need these keys later in this chapter.
 
 To simplify this implementation, we are going to use Stripe's "Checkout" product that creates a high quality checkout experience with very little code.
 
-Check out [Stripe's Card Payment Quickstart Docs](https://docs.stripe.com/payments/quickstart) to get an idea of what we'll be getting into.
-
 The Checkout code will take the user's credit/debit card information. It won't actually complete the payment though. It will just send that information to Stripe and get a token back.  To complete the payment, we'll have to send the token the Checkout code generates to our  server to actually complete the payment. Making a payment is called a `charge` in Stripe's **DSL (Domain Specific Language)**.
 
-> Put this `form` in the `.col-sm-8` element in `/views/pets-show.pug`:
->
-```pug
-.col-sm-8
->
-...
->
-  form(action='your-server-side-code', method='POST')
-    script.stripe-button(src='https://checkout.stripe.com/checkout.js',
-    data-key='pk_test_TYooMQauvdEDq54NiTphI7jx',
-    data-amount='999',
-    data-name='Stripe.com',
-    data-description='Widget',
-    data-image='https://stripe.com/img/documentation/checkout/marketplace.png',
-    data-locale='auto',
-    data-zip-code='true')
-...
-```
+Follow the instructions of [Stripe's Card Payment Quickstart Docs](https://docs.stripe.com/checkout/embedded/quickstart) to add the form and controller code.
 
 Reload, and click the button. We get a nice widget model asking for a bunch of information! And all we had to do was drop in a form!
 
